@@ -2,7 +2,11 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { ReportsModule } from './reports/reports.module'; // 1. استيراد الموديول الجديد
 import { User } from './auth/entities/user.entity';
+import { Incident } from './reports/entities/incident.entity';
+import { Checkpoint } from './checkpoints/entities/checkpoint.entity';
+import { CheckpointHistory } from './checkpoints/entities/CheckpointHistory.entity';
 
 @Module({
   imports: [
@@ -13,11 +17,12 @@ import { User } from './auth/entities/user.entity';
       username: 'admin_wasel',
       password: 'wasel1234',
       database: 'wasel_palestine',
-      entities: [User],
+      entities: [User, Incident, Checkpoint, CheckpointHistory],
       synchronize: true,
     }),
     AuthModule,
     UsersModule,
+    ReportsModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }
