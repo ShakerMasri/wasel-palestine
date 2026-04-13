@@ -12,12 +12,16 @@ export class AuthService {
 
   async validateUser(username: string, pass: string): Promise<unknown> {
     const user = await this.usersService.findOne(username);
-    if (user && (await bcrypt.compare(pass, user.password_hash))) {
-      const { password_hash: _password_hash, ...result } = user;
-      void _password_hash;
-      return result;
+    if (!user) {
+      throw new UnauthorizedException('User not found');
     }
-    return null;
+    const valid = await bcrypt.compare(pass, user.password_hash);
+    if (!valid) {
+      throw new UnauthorizedException('Invalid password');
+    }
+    const { password_hash: _password_hash, ...result } = user;
+    void _password_hash;
+    return result;
   }
 
   async signIn(username: string, password: string) {
@@ -25,8 +29,10 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException();
     }
+    const u: any = user;
+    const payload = { username: u.username, sub: u.id };
     return {
-      access_token: this.jwtService.sign({ username }),
+      access_token: this.jwtService.sign(payload),
     };
   }
 }
