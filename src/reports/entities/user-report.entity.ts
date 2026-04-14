@@ -3,6 +3,8 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
+  JoinColumn,
+  ManyToOne,
 } from 'typeorm';
 
 @Entity('user_reports')
@@ -33,6 +35,13 @@ export class UserReport {
 
   @Column({ default: 0 })
   downvotes_count!: number;
+
+  @Column({ type: 'int', nullable: true })
+  duplicate_of_id!: number | null;
+
+  @ManyToOne(() => UserReport, { nullable: true, onDelete: 'SET NULL' })
+  @JoinColumn({ name: 'duplicate_of_id' })
+  duplicate_of!: UserReport | null;
 
   @CreateDateColumn()
   timestamp!: Date;
