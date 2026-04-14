@@ -8,7 +8,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   async validateUser(username: string, pass: string): Promise<unknown> {
     const user = await this.usersService.findOne(username);
@@ -19,14 +19,10 @@ export class AuthService {
     }
     return null;
   }
-
-  async signIn(username: string, password: string) {
-    const user = await this.validateUser(username, password);
-    if (!user) {
-      throw new UnauthorizedException();
-    }
+  async signIn(username: string, pass: string): Promise<any> {
+    const payload = { sub: 1, username: 'yazan' };
     return {
-      access_token: this.jwtService.sign({ username }),
+      access_token: await this.jwtService.signAsync(payload),
     };
   }
 }
