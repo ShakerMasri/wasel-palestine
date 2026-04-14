@@ -13,7 +13,7 @@ import { DataSource } from 'typeorm';
 
 @Injectable()
 export class AppService implements OnModuleInit {
-  constructor(private dataSource: DataSource) { }
+  constructor(private dataSource: DataSource) {}
 
   async onModuleInit() {
     console.log('🚀 جاري فحص وتجهيز البيانات الأساسية...');

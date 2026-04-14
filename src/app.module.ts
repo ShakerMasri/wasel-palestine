@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { ReportsModule } from './reports/reports.module'; // 1. استيراد الموديول الجديد
 import { User } from './auth/entities/user.entity';
 import { Incident } from './reports/entities/incident.entity';
+import { UserReport } from './reports/entities/user-report.entity';
 import { Checkpoint } from './checkpoints/entities/checkpoint.entity';
 import { CheckpointHistory } from './checkpoints/entities/CheckpointHistory.entity';
 
@@ -17,7 +18,7 @@ import { CheckpointHistory } from './checkpoints/entities/CheckpointHistory.enti
       username: 'admin_wasel',
       password: 'wasel1234',
       database: 'wasel_palestine',
-      entities: [User, Incident, Checkpoint, CheckpointHistory],
+      entities: [User, Incident, Checkpoint, CheckpointHistory, UserReport],
       synchronize: true,
     }),
     AuthModule,
@@ -25,4 +26,4 @@ import { CheckpointHistory } from './checkpoints/entities/CheckpointHistory.enti
     ReportsModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}
