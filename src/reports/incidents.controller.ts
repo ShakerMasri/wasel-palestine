@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Delete,
   Controller,
   Post,
@@ -9,7 +10,9 @@ import {
   Body,
   UseGuards,
   Req,
+  UnauthorizedException,
 } from '@nestjs/common';
+import { Request } from 'express';
 import { IncidentsService } from './incidents.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { CreateReportDto } from './dto/create-report.dto';
@@ -20,8 +23,19 @@ export class IncidentsController {
 
   @UseGuards(AuthGuard)
   @Post()
-  create(@Body() createDto: any, @Req() req: any) {
-    const userId = req.user.userId;
+  create(
+    @Body()
+    createDto: {
+      checkpointId: number;
+      status: string;
+      description: string;
+    },
+    @Req() req: Request & { user?: { userId?: number; sub?: number } },
+  ) {
+    const userId = req.user?.userId ?? req.user?.sub;
+    if (!userId) {
+      throw new UnauthorizedException();
+    }
     return this.incidentsService.create(createDto, userId);
   }
 
@@ -48,8 +62,19 @@ export class ReportsController {
   constructor(private readonly incidentsService: IncidentsService) {}
 
   @Post()
-  createReport(@Body() dto: CreateReportDto) {
-    return this.incidentsService.createReport(dto);
+  createReport(
+    @Body() dto: CreateReportDto,
+    @Req() req: Request & { user?: { userId?: number; sub?: number } },
+  ) {
+    const authenticatedUserId = req.user?.userId ?? req.user?.sub;
+    const fallbackUserId = dto.user_id;
+    const resolvedUserId = authenticatedUserId ?? fallbackUserId;
+
+    if (!resolvedUserId) {
+      throw new BadRequestException('user_id is required');
+    }
+
+    return this.incidentsService.createReport(dto, Number(resolvedUserId));
   }
 
   @Get()
@@ -70,5 +95,41 @@ export class ReportsController {
   @Delete(':id')
   removeReport(@Param('id') id: string) {
     return this.incidentsService.removeReport(+id);
+  }
+
+  @UseGuards(AuthGuard)
+  @Patch(':id/approve')
+  approveReport(
+    @Param('id') id: string,
+    @Req() req: Request & { user?: { userId?: number; sub?: number } },
+  ) {
+    const userId = req.user?.userId ?? req.user?.sub;
+
+    if (!userId) {
+      throw new UnauthorizedException();
+    }
+
+    return this.incidentsService.approveReport(+id, userId);
+  }
+
+  @UseGuards(AuthGuard)
+  @Patch(':id/reject')
+  rejectReport(
+    @Param('id') id: string,
+    @Req() req: Request & { user?: { userId?: number; sub?: number } },
+  ) {
+    const userId = req.user?.userId ?? req.user?.sub;
+
+    if (!userId) {
+      throw new UnauthorizedException();
+    }
+
+    return this.incidentsService.rejectReport(+id, userId);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get(':id/logs')
+  getReportLogs(@Param('id') id: string) {
+    return this.incidentsService.findModerationLogs(+id);
   }
 }
