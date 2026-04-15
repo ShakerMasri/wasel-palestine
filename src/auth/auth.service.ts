@@ -12,6 +12,7 @@ export class AuthService {
 
   async validateUser(username: string, pass: string): Promise<unknown> {
     const user = await this.usersService.findOne(username);
+    console.log('User found from DB:', user);
     if (!user) {
       throw new UnauthorizedException('User not found');
     }

@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { RouteMobilityModule } from './route-mobility/route-mobility.module';
+import { AlertsModule } from './alerts/alerts.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { RouteMobilityModule } from './route-mobility/route-mobility.module';
     AuthModule,
     UsersModule,
     RouteMobilityModule,
+    AlertsModule,
   ],
 })
 export class AppModule {}
