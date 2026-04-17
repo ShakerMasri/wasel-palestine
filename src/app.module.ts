@@ -4,6 +4,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { RouteMobilityModule } from './route-mobility/route-mobility.module';
 import { AlertsModule } from './alerts/alerts.module';
+import { ExternalApiModule } from './external-api/external-api.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { AlertsModule } from './alerts/alerts.module';
     UsersModule,
     RouteMobilityModule,
     AlertsModule,
+    ExternalApiModule,
   ],
 })
 export class AppModule {}
