@@ -34,12 +34,12 @@ docker-compose up -d
 Note: The database is configured to run on port 5433 to avoid conflicts with other local PostgreSQL instances.
 
 2. Install Dependencies
-Bash
+```bash
 npm install
 3. Run the Server
 In development mode, TypeORM uses synchronize: true to automatically create and update database tables.
 
-Bash
+```bash
 npm run start:dev
 The server will run by default at: http://localhost:3000
 
@@ -54,7 +54,7 @@ Authentication: 🔒 Requires login (JWT)
 Description: Creates a new report. The system automatically fetches the human-readable address from the coordinates provided.
 
 Request Body
-
+```bash
 JSON
 {
   "checkpointId": 1,
@@ -79,7 +79,7 @@ Authentication: 🔒 Requires login (JWT)
 Description: Updates the verification status or description of a specific report.
 
 Request Body
-
+```bash
 JSON
 {
   "isVerified": true,
@@ -93,6 +93,7 @@ Authentication: 🌐 Public
 Description: Retrieves a statistical summary of reports and high-severity alerts.
 
 🗄️ Database Schema & Relationships
+
 The following tables and relationships were designed to ensure data integrity:
 
 users: Stores authenticated user information (name, email, and hashed password).
@@ -104,12 +105,14 @@ incidents: This table has a Many-to-One relationship with both users and checkpo
 One user can submit multiple reports.
 
 Each report belongs to one specific user and one specific checkpoint.
+____________________________________________________________________________
 
 🛡️ Validation & Security
+
 A global ValidationPipe is enabled across the application.
 
 Any non-whitelisted properties are rejected to prevent malicious or unexpected input.
 
 AuthGuard is used to ensure that only authenticated users can create or update reports.
-
+_________________________________________________________________________________________
 Developed by Yazan
