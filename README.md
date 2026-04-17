@@ -1,98 +1,113 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+🇵🇸 Wasel Palestine - Checkpoint & Incident API
+📖 Overview
+The Wasel Palestine API is designed to monitor and manage real-time road conditions and military checkpoints. It allows citizens to report incidents and track the status of key transit points.
+A standout feature of this system is its Automated Geocoding Engine, which automatically converts geographic coordinates into precise street addresses (e.g., "King Faisal Street, Nablus") using the Nominatim API, ensuring reports are easily understood by all users.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+🛠️ Tech Stack
+Backend Framework: NestJS
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Database: PostgreSQL / MySQL (Managed via TypeORM)
 
-## Description
+Geocoding Service: Nominatim OpenStreetMap API
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Authentication & Security: JWT & Passport.js
 
-## Project setup
+Validation: class-validator & class-transformer
 
-```bash
-$ npm install
-```
+⚙️ Prerequisites
+Before running the project, make sure you have the following installed:
 
-## Compile and run the project
+Node.js (version 18 or higher)
 
-```bash
-# development
-$ npm run start
+Database Instance (MySQL or PostgreSQL)
 
-# watch mode
-$ npm run start:dev
+Postman (for testing the API endpoints)
 
-# production mode
-$ npm run start:prod
-```
+🚀 Setup & Run
+1. Install Dependencies
+Open the terminal in the project directory and run:
 
-## Run tests
+Bash
+npm install
+2. Configure Environment
+Create a .env file in the root directory and add your database and JWT credentials:
 
-```bash
-# unit tests
-$ npm run test
+Code snippet
+DB_HOST=localhost
+DB_NAME=wasel_db
+JWT_SECRET=yazan_secret_key_2026
+3. Run the Server
+In development mode, the system will automatically sync your database entities.
 
-# e2e tests
-$ npm run test:e2e
+Bash
+npm run start:dev
+The server will run by default at: http://localhost:3000
 
-# test coverage
-$ npm run test:cov
-```
+🔗 API Endpoints
+To test protected endpoints, you must first log in via the Auth module, copy the access_token, and use it as a Bearer Token in Postman.
 
-## Deployment
+1. Create a New Incident (Report)
+Endpoint: POST /incidents
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Authentication: 🔒 Requires login (JWT)
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Description: Creates a new incident report. The system automatically fetches the street address based on the coordinates provided.
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+Request Body:
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+JSON
+{
+  "checkpointId": 1,
+  "type": "Closed",
+  "severity": "High",
+  "description": "Heavy inspection at the main entrance.",
+  "lat": 32.2227,
+  "lon": 35.2621
+}
+2. Get All Incidents
+Endpoint: GET /incidents
 
-## Resources
+Authentication: 🌐 Public
 
-Check out a few resources that may come in handy when working with NestJS:
+Description: Retrieves all incidents with support for pagination and status filtering.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+3. Update Incident Status
+Endpoint: PATCH /incidents/:id
 
-## Support
+Authentication: 🔒 Requires login (JWT)
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Description: Allows authorities or admins to verify a report or update its description.
 
-## Stay in touch
+Request Body:
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+JSON
+{
+  "isVerified": true,
+  "description": "Status confirmed by field sources."
+}
+4. System Statistics
+Endpoint: GET /incidents/stats/summary
 
-## License
+Description: Provides a summary of total reports, high-severity alerts, and verified incidents.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+🗄️ Database Schema & Relationships
+To ensure data integrity, the system uses the following relational structure:
+
+Users Table: Stores credentials and profile information.
+
+Checkpoints Table: Contains the master list of monitored locations.
+
+Incidents Table: This table has a Many-to-One relationship with both users and checkpoints.
+
+One user can submit multiple reports.
+
+Many reports can be linked to a single checkpoint to track its status history.
+
+🛡️ Validation & Security
+Global ValidationPipe: All incoming data is strictly validated.
+
+Whitelist Filtering: Any unexpected properties in the request body are automatically rejected.
+
+AuthGuard: Ensures that only authenticated users can contribute to the reporting system.
+
+Developed by Yazan

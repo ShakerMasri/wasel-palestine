@@ -7,6 +7,7 @@ import { User } from './auth/entities/user.entity';
 import { Incident } from './reports/entities/incident.entity';
 import { Checkpoint } from './checkpoints/entities/checkpoint.entity';
 import { CheckpointHistory } from './checkpoints/entities/CheckpointHistory.entity';
+import { CheckpointsModule } from './checkpoints/checkpoints.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CheckpointHistory } from './checkpoints/entities/CheckpointHistory.enti
       entities: [User, Incident, Checkpoint, CheckpointHistory],
       synchronize: true,
     }),
+    CheckpointsModule,
     AuthModule,
     UsersModule,
     ReportsModule,
