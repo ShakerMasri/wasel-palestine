@@ -61,6 +61,34 @@ npm run start:dev
 
 ---
 
+## 🚧 Road Incidents & Checkpoint Management
+
+A centralized system for monitoring and managing checkpoints, road closures, delays, and hazardous conditions across the road network.
+
+### Core Features
+
+- **Checkpoint Registry** — Maintains a comprehensive, up-to-date registry of all monitored checkpoints, each with a full **status history** to track changes and conditions over time.
+
+- **Incident Categorization** — Incidents are classified by **type** (closure, delay, accident, weather hazard, etc.) and **severity level**, enabling prioritized response and clear situational awareness.
+
+- **Role-Based Management** — Authorized users (moderators & admins) have full control to **create, update, verify, and close** incidents through protected API endpoints.
+
+- **Advanced Querying** — Full support for **filtering, sorting, and pagination** across all incident and checkpoint endpoints for efficient data retrieval.
+
+---
+
+## 🌐 External API Integration
+
+To enhance data accuracy and comprehensiveness, the platform integrates with external APIs that provide information from authoritative third-party sources.
+
+### Geolocation & Routing
+
+Integration with **OpenStreetMap-based providers** (via the Nominatim API) enables automatic reverse geocoding — converting raw GPS coordinates into precise, human-readable street addresses in real time.
+
+> This ensures every reported incident is tied to a verified, recognizable location — removing ambiguity and improving response time for both citizens and field teams.
+
+---
+
 ## 🔗 API Endpoints
 
 > **Authentication:** For protected endpoints, log in via the Auth endpoint, copy the `access_token`, and add it in Postman under **Authorization → Bearer Token**.
