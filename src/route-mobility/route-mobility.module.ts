@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RouteMobilityController } from '../route-mobility/route-mobility.controller';
-import { RouteMobilityService } from '../route-mobility/route-mobility.service';
-import { UserReport, ReportVote } from '../route-mobility/entities';
+import { RouteMobilityService } from './route-mobility.service';
+import { RouteMobilityController } from './route-mobility.controller';
+import { UserReport, ReportVote } from './entities';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserReport, ReportVote])],

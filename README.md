@@ -1,98 +1,110 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🇵🇸 Wasel Palestine - Route Mobility API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 📖 Overview
+The **Route Mobility** module is responsible for handling and managing citizen reports related to road conditions, such as potholes, traffic signal malfunctions, and accidents.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Each report is automatically linked to the user who created it and includes precise geographic coordinates to help authorities quickly locate and resolve the issue.
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🛠️ Tech Stack
+- **Backend Framework:** NestJS
+- **Database:** PostgreSQL (running via Docker)
+- **ORM:** TypeORM
+- **Authentication & Security:** JWT & Passport.js
+- **Validation:** class-validator & class-transformer
 
-## Project setup
+---
 
-```bash
-$ npm install
-```
+## ⚙️ Prerequisites
+Before running the project, make sure you have the following installed:
 
-## Compile and run the project
+- [Node.js](https://nodejs.org/) (version 16 or higher)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Postman](https://www.postman.com/) (for testing the API endpoints)
+
+---
+
+## 🚀 Setup & Run
+
+### 1. Set Up and Start the Database
+The project uses Docker to run a clean PostgreSQL database environment.  
+Open the terminal in the project directory and run:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+docker-compose up -d
 ```
 
-## Run tests
+> **Note:** The database is configured to run on port `5433` to avoid conflicts with other local PostgreSQL instances.
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Run the Server
+In development mode, TypeORM uses `synchronize: true` to automatically create and update database tables.
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run start:dev
 ```
 
-## Deployment
+The server will run by default at: `http://localhost:3000`
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+---
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## 🔗 API Endpoints
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+To test protected endpoints that require authentication (JWT), you must first log in through the **Auth** endpoint, copy the `access_token`, and then add it in Postman under **Authorization** using **Bearer Token**.
+
+### 1. Create a New Report
+- **Endpoint:** `POST /route-mobility/report`
+- **Authentication:** 🔒 Requires login (JWT)
+- **Description:** Creates a new report and links it to the authenticated user's ID extracted from the token.
+
+#### Request Body
+```json
+{
+  "category": "Pothole",
+  "description": "There is a deep pothole obstructing traffic at the main intersection.",
+  "latitude": 32.22111,
+  "longitude": 35.25444
+}
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 2. Get All Reports
+- **Endpoint:** `GET /route-mobility/reports`
+- **Authentication:** 🌐 Public
+- **Description:** Retrieves all reports stored in the database for display, such as on a map.
 
-## Resources
+### 3. Update Report Status
+- **Endpoint:** `PATCH /route-mobility/report/:id/status`
+- **Authentication:** 🔒 Requires login (JWT)
+- **Description:** Updates the status of a report, for example from `Pending` to `In Progress`.
 
-Check out a few resources that may come in handy when working with NestJS:
+#### Request Body
+```json
+{
+  "status": "In Progress"
+}
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+---
 
-## Support
+## 🗄️ Database Schema & Relationships
+The following tables and relationships were designed to ensure data integrity:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- **`users`**  
+  Stores authenticated user information such as name, email, and hashed password.
 
-## Stay in touch
+- **`user_reports`**  
+  Stores report details. This table has a **Many-to-One** relationship with the `users` table, which means:
+  - One user can submit multiple reports
+  - Each report belongs to one specific user
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## 🛡️ Validation & Security
+- A global **ValidationPipe** is enabled across the application.
+- Any non-whitelisted properties are rejected to prevent malicious or unexpected input.
+- `AuthGuard` is used to ensure that only authenticated users can create or update reports.

@@ -2,7 +2,9 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { User } from './auth/entities/user.entity';
+import { RouteMobilityModule } from './route-mobility/route-mobility.module';
+import { AlertsModule } from './alerts/alerts.module';
+import { ExternalApiModule } from './external-api/external-api.module';
 
 @Module({
   imports: [
@@ -13,11 +15,14 @@ import { User } from './auth/entities/user.entity';
       username: 'admin_wasel',
       password: 'wasel1234',
       database: 'wasel_palestine',
-      entities: [User],
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
     AuthModule,
     UsersModule,
+    RouteMobilityModule,
+    AlertsModule,
+    ExternalApiModule,
   ],
 })
 export class AppModule {}
