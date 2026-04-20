@@ -15,7 +15,7 @@ export class ReportVote {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 20, nullable: true, default: 'upvote' })
   vote_type!: string;
 
   @ManyToOne(() => UserReport, (report) => report.votes, {

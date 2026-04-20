@@ -12,27 +12,30 @@ export class AuthService {
 
   async validateUser(username: string, pass: string): Promise<unknown> {
     const user = await this.usersService.findOne(username);
-    if (!user) {
-      throw new UnauthorizedException('User not found');
+    if (user && (await bcrypt.compare(pass, user.password_hash))) {
+      const { password_hash: _password_hash, ...result } = user;
+      void _password_hash;
+      return result;
     }
-    const valid = await bcrypt.compare(pass, user.password_hash);
-    if (!valid) {
-      throw new UnauthorizedException('Invalid password');
-    }
-    const { password_hash: _password_hash, ...result } = user;
-    void _password_hash;
-    return result;
+    return null;
   }
 
-  async signIn(username: string, password: string) {
-    const user = await this.validateUser(username, password);
+  async signIn(username: string, pass: string): Promise<any> {
+    const user = await this.validateUser(username, pass);
+
     if (!user) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Invalid credentials');
     }
-    const u: any = user;
-    const payload = { username: u.username, sub: u.id };
+
+    const authUser = user as { id: number; username: string; role: string };
+    const payload = {
+      sub: authUser.id,
+      username: authUser.username,
+      role: authUser.role,
+    };
+
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: await this.jwtService.signAsync(payload),
     };
   }
 }

@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { UserReport } from '../../route-mobility/entities/user-report.entity';
 import { ReportVote } from '../../route-mobility/entities/report-vote.entity';
+import { Alert } from '../../alerts/entities/alert.entity';
 
 @Entity('users')
 export class User {
@@ -40,4 +41,7 @@ export class User {
 
   @OneToMany(() => ReportVote, (vote) => vote.user)
   votes!: ReportVote[];
+
+  @OneToMany(() => Alert, (alert) => alert.user)
+  alerts!: Alert[];
 }

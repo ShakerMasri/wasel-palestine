@@ -9,7 +9,6 @@ import { Request } from 'express';
 import { Reflector } from '@nestjs/core';
 import { IS_PUBLIC_KEY } from './decorators/public.decorator';
 import { jwtConstants } from './constants';
-
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
@@ -22,7 +21,13 @@ export class AuthGuard implements CanActivate {
       context.getHandler(),
       context.getClass(),
     ]);
+
+    console.log('--- Checking Route ---');
+    console.log('Path:', context.switchToHttp().getRequest().url);
+    console.log('Is Public?:', isPublic);
+
     if (isPublic) {
+      console.log('--- Access Granted by Guard ---');
       return true;
     }
 

@@ -1,12 +1,30 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RouteMobilityController } from '../route-mobility/route-mobility.controller';
-import { RouteMobilityService } from '../route-mobility/route-mobility.service';
-import { UserReport, ReportVote } from '../route-mobility/entities';
+import { Incident } from './entities/incident.entity';
+import { UserReport } from './entities/user-report.entity';
+import { ReportVote } from './entities/report-vote.entity';
+import { ModerationLog } from './entities/moderation-log.entity';
+import { User } from '../auth/entities/user.entity';
+import { IncidentsService } from './incidents.service';
+import { IncidentsController, ReportsController } from './incidents.controller';
+import { ReportVotesService } from './report-votes.service';
+import { ReportVotesController } from './report-votes.controller';
+import { Checkpoint } from '../checkpoints/entities/checkpoint.entity';
+import { CheckpointHistory } from '../checkpoints/entities/CheckpointHistory.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserReport, ReportVote])],
-  controllers: [RouteMobilityController],
-  providers: [RouteMobilityService],
+  imports: [
+    TypeOrmModule.forFeature([
+      Incident,
+      UserReport,
+      ReportVote,
+      ModerationLog,
+      User,
+      Checkpoint,
+      CheckpointHistory,
+    ]),
+  ],
+  controllers: [IncidentsController, ReportsController, ReportVotesController],
+  providers: [IncidentsService, ReportVotesService],
 })
-export class RouteMobilityModule {}
+export class ReportsModule {}
