@@ -3,7 +3,11 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import { UserReport } from '../../route-mobility/entities/user-report.entity';
+import { ReportVote } from '../../route-mobility/entities/report-vote.entity';
+import { Alert } from '../../alerts/entities/alert.entity';
 
 @Entity('users')
 export class User {
@@ -31,4 +35,14 @@ export class User {
 
   @CreateDateColumn()
   created_at!: Date;
+
+  @OneToMany(() => UserReport, (report) => report.user)
+  reports!: UserReport[];
+
+  @OneToMany(() => ReportVote, (vote) => vote.user)
+  votes!: ReportVote[];
+
+  @OneToMany(() => Alert, (alert) => alert.user)
+  alerts!: Alert[];
+ 
 }
