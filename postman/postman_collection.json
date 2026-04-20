@@ -1,0 +1,545 @@
+{
+  "info": {
+    "_postman_id": "wasel-postman-collection",
+    "name": "Wasel Local API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Postman collection for the Wasel local NestJS API."
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "const token = pm.environment.get(\"token\") || pm.collectionVariables.get(\"token\") || pm.globals.get(\"token\");",
+          "if (token && !pm.request.url.toString().includes('/auth/login')) {",
+          "  pm.request.headers.upsert({ key: 'Authorization', value: `Bearer ${token}` });",
+          "}"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "auth": {
+              "type": "noauth"
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Save JWT token\", function () {",
+                    "  const jsonData = pm.response.json();",
+                    "  const token = jsonData.access_token || jsonData.token;",
+                    "  pm.environment.set(\"token\", token);",
+                    "  pm.collectionVariables.set(\"token\", token);",
+                    "  pm.globals.set(\"token\", token);",
+                    "});"
+                  ]
+                }
+              }
+            ],
+            "description": "Authenticate a user and return a token."
+          }
+        },
+        {
+          "name": "Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/profile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "auth",
+                "profile"
+              ]
+            },
+            "description": "Fetch the authenticated user profile."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Incidents",
+      "item": [
+        {
+          "name": "Create Incident",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"checkpointId\": 1,\n  \"status\": \"Open\",\n  \"description\": \"Incident description\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/incidents",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "incidents"
+              ]
+            },
+            "description": "Create a new incident report."
+          }
+        },
+        {
+          "name": "List Incidents",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/incidents",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "incidents"
+              ]
+            },
+            "description": "List all incidents with optional filters and pagination."
+          }
+        },
+        {
+          "name": "Update Incident",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Closed\",\n  \"description\": \"Updated incident details\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/incidents/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "incidents",
+                ":id"
+              ]
+            },
+            "description": "Update an incident by id."
+          }
+        },
+        {
+          "name": "Delete Incident",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/incidents/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "incidents",
+                ":id"
+              ]
+            },
+            "description": "Delete an incident by id."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "Create Report",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": 1,\n  \"category\": \"traffic\",\n  \"description\": \"accident\",\n  \"latitude\": 31.95,\n  \"longitude\": 35.91\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/reports",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "reports"
+              ]
+            },
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Save report id\", function () {",
+                    "  const jsonData = pm.response.json();",
+                      "  const report = jsonData.report || jsonData;",
+                      "  if (report && report.id) {",
+                      "    pm.environment.set(\"report_id\", report.id);",
+                      "    pm.collectionVariables.set(\"report_id\", report.id);",
+                    "  }",
+                    "});"
+                  ]
+                }
+              }
+            ],
+            "description": "Create a new user report. Validation examples: invalid latitude { \"latitude\": 120 } -> 400, empty description { \"description\": \"   \" } -> 400, spam guard: max 3 reports per 5 minutes per user -> 429. Duplicate check: If similar report exists within 10 minutes and nearby location, a duplicate report is stored and linked to the original. Example: { \"message\": \"Similar report already exists\", \"duplicate_of\": {{report_id}} }"
+          }
+        },
+        {
+          "name": "Get Report By Id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/reports/{{report_id}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "reports",
+                "{{report_id}}"
+              ]
+            },
+            "description": "Retrieve a single user report by id."
+          }
+        },
+        {
+          "name": "Update Report",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": \"traffic\",\n  \"description\": \"updated accident details\",\n  \"latitude\": 31.951,\n  \"longitude\": 35.911\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/reports/{{report_id}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "reports",
+                "{{report_id}}"
+              ]
+            },
+            "description": "Update a user report by id."
+          }
+        },
+        {
+          "name": "Delete Report",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/reports/{{report_id}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "reports",
+                "{{report_id}}"
+              ]
+            },
+            "description": "Delete a user report by id."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Moderation",
+      "item": [
+        {
+          "name": "PATCH Approve Report",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/reports/{{report_id}}/approve",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "reports",
+                "{{report_id}}",
+                "approve"
+              ]
+            },
+            "description": "Approve a pending report as an admin."
+          }
+        },
+        {
+          "name": "PATCH Reject Report",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/reports/{{report_id}}/reject",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "reports",
+                "{{report_id}}",
+                "reject"
+              ]
+            },
+            "description": "Reject a pending report as an admin."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Audit Logs",
+      "item": [
+        {
+          "name": "GET Report Logs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/reports/{{report_id}}/logs",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "reports",
+                "{{report_id}}",
+                "logs"
+              ]
+            },
+            "description": "Fetch moderation actions for a report."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Voting",
+      "item": [
+        {
+          "name": "POST Vote Report",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vote_type\": \"upvote\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/reports/{{report_id}}/vote",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "reports",
+                "{{report_id}}",
+                "vote"
+              ]
+            },
+            "description": "Vote on a report using upvote or downvote."
+          }
+        },
+        {
+          "name": "DELETE Remove Vote",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/reports/{{report_id}}/vote",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "reports",
+                "{{report_id}}",
+                "vote"
+              ]
+            },
+            "description": "Remove the authenticated user's vote from a report."
+          }
+        },
+        {
+          "name": "GET Votes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/reports/{{report_id}}/votes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3006",
+              "path": [
+                "reports",
+                "{{report_id}}",
+                "votes"
+              ]
+            },
+            "description": "Get votes summary for a report."
+          }
+        }
+      ]
+    }
+  ]
+}

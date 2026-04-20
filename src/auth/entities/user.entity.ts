@@ -44,5 +44,4 @@ export class User {
 
   @OneToMany(() => Alert, (alert) => alert.user)
   alerts!: Alert[];
- 
 }
