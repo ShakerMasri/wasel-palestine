@@ -3,21 +3,27 @@ import { Incident } from '../../reports/entities/incident.entity';
 
 @Entity()
 export class Checkpoint {
-    @PrimaryGeneratedColumn()
-    id!: number;
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-    @Column()
-    name!: string;
+  @Column()
+  name!: string;
 
-    @Column()
-    location!: string;
+  @Column()
+  location!: string;
 
-    @Column({ default: 'Open' })
-    currentStatus!: string;
+  @Column('decimal', { precision: 10, scale: 8 })
+  latitude!: number;
 
-    @OneToMany('Incident', 'checkpoint')
-    incidents!: any[];
+  @Column('decimal', { precision: 11, scale: 8 })
+  longitude!: number;
 
-    @OneToMany('CheckpointHistory', 'checkpoint')
-    histories!: any[];
+  @Column({ default: 'Open' })
+  currentStatus!: string;
+
+  @OneToMany(() => Incident, (incident) => incident.checkpoint)
+  incidents!: Incident[];
+
+  @OneToMany('CheckpointHistory', 'checkpoint')
+  histories!: any[];
 }

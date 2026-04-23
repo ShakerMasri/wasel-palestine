@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RouteMobilityService } from './route-mobility.service';
 import { RouteMobilityController } from './route-mobility.controller';
-import { UserReport, ReportVote } from './entities';
+import { RouteMobilityService } from './route-mobility.service';
+import { Checkpoint } from '../checkpoints/entities/checkpoint.entity';
+import { Incident } from '../reports/entities/incident.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserReport, ReportVote])],
+  imports: [TypeOrmModule.forFeature([Checkpoint, Incident])],
   controllers: [RouteMobilityController],
   providers: [RouteMobilityService],
 })
