@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { ReportsModule } from './reports/reports.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,16 +15,25 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('Wasel Palestine - Mobility Module')
-    .setDescription(
-      'API documentation for the route mobility and reports system',
-    )
+    .setTitle('Wasel Palestine API')
+    .setDescription('Crowdsourced Reporting System')
     .setVersion('1.0')
-    .addBearerAuth()
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+      'access-token',
+    )
     .build();
 
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  const document = SwaggerModule.createDocument(app, config, {
+    include: [ReportsModule],
+  });
+  SwaggerModule.setup('api', app, document, {
+    jsonDocumentUrl: 'api-json',
+  });
 
   const port = process.env.PORT ?? 3000;
   await app.listen(port);

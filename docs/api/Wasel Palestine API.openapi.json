@@ -1,0 +1,473 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Wasel Palestine API",
+    "description": "Crowdsourced Reporting System",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Reporting"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "login",
+        "deprecated": false,
+        "description": "Authenticate user and return a JWT access token for authorized requests.",
+        "operationId": "AuthController_login",
+        "tags": [
+          "Reporting"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VoteReportDto"
+              },
+              "example": {
+                "username": "admin",
+                "password": "123456"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Vote recorded successfully",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/reports": {
+      "post": {
+        "summary": "Create a report",
+        "deprecated": false,
+        "description": "Create a new report with optional location (latitude and longitude), category, and description.\nIf location is not provided, the report will still be created without geospatial data.",
+        "operationId": "ReportsController_createReport",
+        "tags": [
+          "Reporting"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateReportDto"
+              },
+              "example": {
+                "category": "Road obstruction",
+                "description": "Test report",
+                "latitude": 31.7683,
+                "longitude": 35.2137
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Report created successfully",
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid report payload",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "summary": "Get all reports",
+        "deprecated": false,
+        "description": "",
+        "operationId": "ReportsController_findAllReports",
+        "tags": [
+          "Reporting"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Reports returned successfully",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/reports/50": {
+      "get": {
+        "summary": "Get a report by ID",
+        "deprecated": false,
+        "description": "Retrieve detailed information for a specific report by its ID.",
+        "operationId": "ReportsController_findReportById",
+        "tags": [
+          "Reporting"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Report returned successfully",
+            "headers": {}
+          },
+          "404": {
+            "description": "Report not found",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "summary": "Update a report",
+        "deprecated": false,
+        "description": "Update the details of an existing report such as category, description, or  location (latitude and longitude)",
+        "operationId": "ReportsController_updateReport",
+        "tags": [
+          "Reporting"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateReportDto"
+              },
+              "example": {
+                "category": "traffic",
+                "description": "updated accident details",
+                "latitude": 31.951,
+                "longitude": 35.911
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Report updated successfully",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a report",
+        "deprecated": false,
+        "description": "Delete a report permanently from the system.",
+        "operationId": "ReportsController_removeReport",
+        "tags": [
+          "Reporting"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Report deleted successfully",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/reports/53/approve": {
+      "patch": {
+        "summary": "Approve a report",
+        "deprecated": false,
+        "description": "Approve a report after moderation. Approved reports are marked as valid.",
+        "operationId": "ReportsController_approveReport",
+        "tags": [
+          "Reporting"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Report approved successfully",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/reports/53/reject": {
+      "patch": {
+        "summary": "Reject a report",
+        "deprecated": false,
+        "description": "Reject a report during moderation and mark it as invalid or inappropriate.",
+        "operationId": "ReportsController_rejectReport",
+        "tags": [
+          "Reporting"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Report rejected successfully",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/reports/53/logs": {
+      "get": {
+        "summary": "Get moderation logs for a report",
+        "deprecated": false,
+        "description": "Retrieve moderation history logs for a specific report including approval or rejection actions.",
+        "operationId": "ReportsController_getReportLogs",
+        "tags": [
+          "Reporting"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Moderation logs returned successfully",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/reports/49/vote": {
+      "post": {
+        "summary": "Vote on a report",
+        "deprecated": false,
+        "description": "Submit a vote (e.g., upvote) for a report to increase its priority or visibility.",
+        "operationId": "ReportVotesController_voteOnReport",
+        "tags": [
+          "Reporting"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VoteReportDto"
+              },
+              "example": {
+                "vote_type": "upvote"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Vote recorded successfully",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/reports/53/vote": {
+      "delete": {
+        "summary": "Remove a report vote",
+        "deprecated": false,
+        "description": "Remove a previously submitted vote from a report.",
+        "operationId": "ReportVotesController_removeVote",
+        "tags": [
+          "Reporting"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Vote removed successfully",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/reports/49/votes": {
+      "get": {
+        "summary": "Get report vote summary",
+        "deprecated": false,
+        "description": "Retrieve a summary of votes for a report including total upvotes and voting details.",
+        "operationId": "ReportVotesController_getReportVotes",
+        "tags": [
+          "Reporting"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Vote summary returned successfully",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateReportDto": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "number",
+            "description": "Optional authenticated or fallback user ID",
+            "example": 12
+          },
+          "category": {
+            "type": "string",
+            "description": "Report category",
+            "example": "Road obstruction"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed report description",
+            "example": "A fallen barrier is blocking the main road."
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude coordinate",
+            "example": 31.7683
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude coordinate",
+            "example": 35.2137
+          }
+        },
+        "required": [
+          "category",
+          "description",
+          "latitude",
+          "longitude"
+        ]
+      },
+      "UpdateReportDto": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Updated report category",
+            "example": "Traffic obstruction"
+          },
+          "description": {
+            "type": "string",
+            "description": "Updated report description",
+            "example": "The obstruction has shifted closer to the checkpoint."
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Updated latitude coordinate",
+            "example": 31.769
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Updated longitude coordinate",
+            "example": 35.2142
+          }
+        }
+      },
+      "VoteReportDto": {
+        "type": "object",
+        "properties": {
+          "vote_type": {
+            "type": "string",
+            "description": "Vote direction",
+            "example": "upvote"
+          }
+        },
+        "required": [
+          "vote_type"
+        ]
+      }
+    },
+    "responses": {},
+    "securitySchemes": {
+      "access-token": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      },
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": [],
+  "security": []
+}

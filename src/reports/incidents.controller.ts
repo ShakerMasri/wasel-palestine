@@ -13,10 +13,19 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Request } from 'express';
+import {
+  ApiBearerAuth,
+  ApiExcludeController,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { IncidentsService } from './incidents.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { CreateReportDto } from './dto/create-report.dto';
 import { UpdateReportDto } from './dto/update-report.dto';
+
+@ApiExcludeController()
 @Controller('incidents')
 export class IncidentsController {
   constructor(private readonly incidentsService: IncidentsService) {}
@@ -57,10 +66,14 @@ export class IncidentsController {
   }
 }
 
+@ApiTags('Reporting')
 @Controller('reports')
 export class ReportsController {
   constructor(private readonly incidentsService: IncidentsService) {}
 
+  @ApiOperation({ summary: 'Create a report' })
+  @ApiResponse({ status: 201, description: 'Report created successfully' })
+  @ApiResponse({ status: 400, description: 'Invalid report payload' })
   @Post()
   createReport(
     @Body() dto: CreateReportDto,
@@ -77,26 +90,39 @@ export class ReportsController {
     return this.incidentsService.createReport(dto, Number(resolvedUserId));
   }
 
+  @ApiOperation({ summary: 'Get all reports' })
+  @ApiResponse({ status: 200, description: 'Reports returned successfully' })
   @Get()
   findAllReports() {
     return this.incidentsService.findAllReports();
   }
 
+  @ApiOperation({ summary: 'Get a report by ID' })
+  @ApiResponse({ status: 200, description: 'Report returned successfully' })
+  @ApiResponse({ status: 404, description: 'Report not found' })
   @Get(':id')
   findReportById(@Param('id') id: string) {
     return this.incidentsService.findReportById(+id);
   }
 
+  @ApiOperation({ summary: 'Update a report' })
+  @ApiResponse({ status: 200, description: 'Report updated successfully' })
   @Patch(':id')
   updateReport(@Param('id') id: string, @Body() dto: UpdateReportDto) {
     return this.incidentsService.updateReport(+id, dto);
   }
 
+  @ApiOperation({ summary: 'Delete a report' })
+  @ApiResponse({ status: 200, description: 'Report deleted successfully' })
   @Delete(':id')
   removeReport(@Param('id') id: string) {
     return this.incidentsService.removeReport(+id);
   }
 
+  @ApiBearerAuth('access-token')
+  @ApiOperation({ summary: 'Approve a report' })
+  @ApiResponse({ status: 200, description: 'Report approved successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
   @UseGuards(AuthGuard)
   @Patch(':id/approve')
   approveReport(
@@ -112,6 +138,10 @@ export class ReportsController {
     return this.incidentsService.approveReport(+id, userId);
   }
 
+  @ApiBearerAuth('access-token')
+  @ApiOperation({ summary: 'Reject a report' })
+  @ApiResponse({ status: 200, description: 'Report rejected successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
   @UseGuards(AuthGuard)
   @Patch(':id/reject')
   rejectReport(
@@ -127,6 +157,10 @@ export class ReportsController {
     return this.incidentsService.rejectReport(+id, userId);
   }
 
+  @ApiBearerAuth('access-token')
+  @ApiOperation({ summary: 'Get moderation logs for a report' })
+  @ApiResponse({ status: 200, description: 'Moderation logs returned successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
   @UseGuards(AuthGuard)
   @Get(':id/logs')
   getReportLogs(@Param('id') id: string) {
