@@ -13,10 +13,25 @@ import { RouteMobilityService } from './route-mobility.service';
 import { CreateUserReportDto } from './dto/create-user-report.dto';
 import { UpdateReportStatusDto } from './dto/update-report-status.dto';
 
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
+
+@ApiTags('Route Mobility')
 @Controller('route-mobility')
 export class RouteMobilityController {
   constructor(private readonly routeMobilityService: RouteMobilityService) {}
 
+  @ApiOperation({ summary: 'Create a new user report' })
+  @ApiBearerAuth()
+  @ApiResponse({ status: 201, description: 'Report created successfully.' })
+  @ApiResponse({
+    status: 401,
+    description: 'Missing or invalid authentication.',
+  })
   @Post('report')
   async create(
     @Body() createDto: CreateUserReportDto,
@@ -42,10 +57,18 @@ export class RouteMobilityController {
     );
   }
 
+  @ApiOperation({ summary: 'Get all reports' })
+  @ApiResponse({
+    status: 200,
+    description: 'List of reports retrieved successfully.',
+  })
   @Get('reports')
   async findAll() {
     return await this.routeMobilityService.getAllReports();
   }
+
+  @ApiOperation({ summary: 'Update report status' })
+  @ApiResponse({ status: 200, description: 'Status updated successfully.' })
   @Patch('report/:id/status')
   async updateStatus(
     @Param('id') id: string,
