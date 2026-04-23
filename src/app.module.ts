@@ -7,7 +7,10 @@ import { CheckpointsModule } from './checkpoints/checkpoints.module';
 import { RouteMobilityModule } from './route-mobility/route-mobility.module';
 import { AlertsModule } from './alerts/alerts.module';
 import { ExternalApiModule } from './external-api/external-api.module';
-
+import { EventEmitterModule } from '@nestjs/event-emitter'
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { IncidentsModule } from './incidents/incidents.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -25,8 +28,13 @@ import { ExternalApiModule } from './external-api/external-api.module';
     CheckpointsModule,
     ReportsModule,
     RouteMobilityModule,
+    EventEmitterModule.forRoot(),
     AlertsModule,
+    ReportsModule,
+    IncidentsModule,
     ExternalApiModule,
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
