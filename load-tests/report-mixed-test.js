@@ -1,17 +1,16 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
+import {
+  authHeaders,
+  getAuthTokens,
+  getBaseUrl,
+  jsonAuthHeaders,
+  selectAuthToken,
+} from './report-auth.js';
 
-const BASE_URL = __ENV.BASE_URL || 'http://localhost:3000';
-const JWT_TOKEN = __ENV.JWT_TOKEN || 'YOUR_ACTUAL_JWT_TOKEN_HERE';
+const BASE_URL = getBaseUrl();
 const FALLBACK_REPORT_ID = __ENV.REPORT_ID || '';
-
-const HEADERS = {
-  headers: {
-    Authorization: `Bearer ${JWT_TOKEN}`,
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
-};
+const CREATE_EVERY_N_ITERS = Number(__ENV.MIXED_CREATE_EVERY_N || 120);
 
 export const options = {
   stages: [
@@ -62,29 +61,46 @@ function extractFirstReportId(response) {
   }
 }
 
-export default function () {
-  const createResponse = http.post(
-    `${BASE_URL}/reports`,
-    buildCreateReportPayload(),
-    HEADERS,
-  );
-  check(createResponse, {
-    'mixed create status is 200 or 201': (res) =>
-      res.status === 200 || res.status === 201,
-  });
+export function setup() {
+  const tokens = getAuthTokens(BASE_URL);
+  return { tokens };
+}
 
-  const listResponse = http.get(`${BASE_URL}/reports`, HEADERS);
+export default function (data) {
+  const token = selectAuthToken(data.tokens);
+  const jsonHeaders = jsonAuthHeaders(token);
+  const getHeaders = authHeaders(token);
+
+  let createResponse = null;
+  const shouldCreate = __VU === 1 && __ITER % CREATE_EVERY_N_ITERS === 0;
+
+  if (shouldCreate) {
+    createResponse = http.post(
+      `${BASE_URL}/reports`,
+      buildCreateReportPayload(),
+      jsonHeaders,
+    );
+    check(createResponse, {
+      'mixed create status is 200 or 201': (res) =>
+        res.status === 200 || res.status === 201,
+    });
+  }
+
+  const listResponse = http.get(`${BASE_URL}/reports`, getHeaders);
   check(listResponse, {
     'mixed list status is 200': (res) => res.status === 200,
   });
 
   const reportId =
-    extractId(createResponse) ||
+    (createResponse ? extractId(createResponse) : null) ||
     extractFirstReportId(listResponse) ||
     FALLBACK_REPORT_ID;
 
   if (reportId) {
-    const detailResponse = http.get(`${BASE_URL}/reports/${reportId}`, HEADERS);
+    const detailResponse = http.get(
+      `${BASE_URL}/reports/${reportId}`,
+      getHeaders,
+    );
     check(detailResponse, {
       'mixed detail status is 200': (res) => res.status === 200,
     });
@@ -92,7 +108,7 @@ export default function () {
     const voteResponse = http.post(
       `${BASE_URL}/reports/${reportId}/vote`,
       JSON.stringify({ vote_type: 'upvote' }),
-      HEADERS,
+      jsonHeaders,
     );
     check(voteResponse, {
       'mixed vote status is 200 or 201': (res) =>
@@ -101,7 +117,7 @@ export default function () {
 
     const voteSummaryResponse = http.get(
       `${BASE_URL}/reports/${reportId}/votes`,
-      HEADERS,
+      getHeaders,
     );
     check(voteSummaryResponse, {
       'mixed vote summary status is 200': (res) => res.status === 200,

@@ -1,29 +1,24 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
+import {
+  getAuthTokens,
+  getBaseUrl,
+  jsonAuthHeaders,
+  selectAuthToken,
+} from './report-auth.js';
 
-const BASE_URL = __ENV.BASE_URL || 'http://localhost:3000';
-const JWT_TOKEN = __ENV.JWT_TOKEN || 'YOUR_ACTUAL_JWT_TOKEN_HERE';
-
-const HEADERS = {
-  headers: {
-    Authorization: `Bearer ${JWT_TOKEN}`,
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
-};
+const BASE_URL = getBaseUrl();
 
 export const options = {
-  stages: [
-    { duration: '30s', target: 5 },
-    { duration: '1m', target: 15 },
-    { duration: '30s', target: 25 },
-    { duration: '30s', target: 0 },
-  ],
+  vus: Number(__ENV.CREATE_VUS || 1),
+  duration: __ENV.CREATE_DURATION || '3m',
   thresholds: {
     http_req_failed: ['rate<0.01'],
     http_req_duration: ['p(95)<750'],
   },
 };
+
+const CREATE_INTERVAL_SECONDS = Number(__ENV.CREATE_INTERVAL_SECONDS || 70);
 
 function buildCreateReportPayload() {
   const suffix = `${Date.now()}-${__VU}-${__ITER}`;
@@ -36,11 +31,18 @@ function buildCreateReportPayload() {
   });
 }
 
-export default function () {
+export function setup() {
+  const tokens = getAuthTokens(BASE_URL);
+  return { tokens };
+}
+
+export default function (data) {
+  const token = selectAuthToken(data.tokens);
+  const headers = jsonAuthHeaders(token);
   const response = http.post(
     `${BASE_URL}/reports`,
     buildCreateReportPayload(),
-    HEADERS,
+    headers,
   );
 
   check(response, {
@@ -49,5 +51,6 @@ export default function () {
     'create report returns a body': (res) => res.body && res.body.length > 0,
   });
 
-  sleep(1);
+  // API policy allows only 3 creates per 5 minutes per user.
+  sleep(CREATE_INTERVAL_SECONDS);
 }

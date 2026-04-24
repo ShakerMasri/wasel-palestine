@@ -1,17 +1,16 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
+import {
+  authHeaders,
+  getAuthTokens,
+  getBaseUrl,
+  jsonAuthHeaders,
+  selectAuthToken,
+} from './report-auth.js';
 
-const BASE_URL = __ENV.BASE_URL || 'http://localhost:3000';
-const JWT_TOKEN = __ENV.JWT_TOKEN || 'YOUR_ACTUAL_JWT_TOKEN_HERE';
+const BASE_URL = getBaseUrl();
 const FALLBACK_REPORT_ID = __ENV.REPORT_ID || '';
-
-const HEADERS = {
-  headers: {
-    Authorization: `Bearer ${JWT_TOKEN}`,
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
-};
+const CREATE_EVERY_N_ITERS = Number(__ENV.SOAK_CREATE_EVERY_N || 150);
 
 export const options = {
   vus: 8,
@@ -50,19 +49,28 @@ function extractFirstReportId(response) {
   }
 }
 
-export default function () {
-  const listResponse = http.get(`${BASE_URL}/reports`, HEADERS);
+export function setup() {
+  const tokens = getAuthTokens(BASE_URL);
+  return { tokens };
+}
+
+export default function (data) {
+  const token = selectAuthToken(data.tokens);
+  const jsonHeaders = jsonAuthHeaders(token);
+  const getHeaders = authHeaders(token);
+
+  const listResponse = http.get(`${BASE_URL}/reports`, getHeaders);
   check(listResponse, {
     'soak list status is 200': (res) => res.status === 200,
   });
 
   const reportId = extractFirstReportId(listResponse) || FALLBACK_REPORT_ID;
 
-  if (__ITER % 25 === 0) {
+  if (__VU === 1 && __ITER % CREATE_EVERY_N_ITERS === 0) {
     const createResponse = http.post(
       `${BASE_URL}/reports`,
       buildCreateReportPayload(),
-      HEADERS,
+      jsonHeaders,
     );
     check(createResponse, {
       'soak create status is 200 or 201': (res) =>
@@ -71,7 +79,10 @@ export default function () {
   }
 
   if (reportId) {
-    const detailResponse = http.get(`${BASE_URL}/reports/${reportId}`, HEADERS);
+    const detailResponse = http.get(
+      `${BASE_URL}/reports/${reportId}`,
+      getHeaders,
+    );
     check(detailResponse, {
       'soak detail status is 200': (res) => res.status === 200,
     });

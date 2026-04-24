@@ -1,15 +1,13 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
+import {
+  authHeaders,
+  getAuthTokens,
+  getBaseUrl,
+  selectAuthToken,
+} from './report-auth.js';
 
-const BASE_URL = __ENV.BASE_URL || 'http://localhost:3000';
-const JWT_TOKEN = __ENV.JWT_TOKEN || 'YOUR_ACTUAL_JWT_TOKEN_HERE';
-
-const HEADERS = {
-  headers: {
-    Authorization: `Bearer ${JWT_TOKEN}`,
-    Accept: 'application/json',
-  },
-};
+const BASE_URL = getBaseUrl();
 
 export const options = {
   vus: 20,
@@ -20,8 +18,15 @@ export const options = {
   },
 };
 
-export default function () {
-  const response = http.get(`${BASE_URL}/reports`, HEADERS);
+export function setup() {
+  const tokens = getAuthTokens(BASE_URL);
+  return { tokens };
+}
+
+export default function (data) {
+  const token = selectAuthToken(data.tokens);
+  const headers = authHeaders(token);
+  const response = http.get(`${BASE_URL}/reports`, headers);
 
   check(response, {
     'list reports status is 200': (res) => res.status === 200,
