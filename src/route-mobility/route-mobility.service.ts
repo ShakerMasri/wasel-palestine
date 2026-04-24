@@ -1,13 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { Checkpoint } from '../checkpoints/entities/checkpoint.entity';
 import { Incident } from '../reports/entities/incident.entity';
 import { EstimateRouteDto, RouteMode } from './dto/estimate-route.dto';
+import { ExternalApiService } from '../external-api/external-api.service';
 
 type Point = {
   latitude: number;
   longitude: number;
+};
+
+type RouteFactor = {
+  type: string;
+  message: string;
+  impactDistanceKm: number;
+  impactDurationMinutes: number;
 };
 
 @Injectable()
@@ -15,8 +24,11 @@ export class RouteMobilityService {
   constructor(
     @InjectRepository(Checkpoint)
     private readonly checkpointRepo: Repository<Checkpoint>,
+
     @InjectRepository(Incident)
     private readonly incidentRepo: Repository<Incident>,
+
+    private readonly externalApiService: ExternalApiService,
   ) {}
 
   async estimateRoute(dto: EstimateRouteDto) {
@@ -33,22 +45,66 @@ export class RouteMobilityService {
     const mode = dto.mode ?? RouteMode.BALANCED;
     const avoidCheckpoints = dto.avoidCheckpoints ?? false;
     const avoidAreas = dto.avoidAreas ?? [];
+    const useExternalRouting = dto.useExternalRouting ?? true;
 
     const directDistanceKm = this.haversineKm(start, end);
     const baseRoadFactor = this.getBaseRoadFactor(mode);
     const averageSpeedKmh = this.getAverageSpeed(mode);
 
-    let estimatedDistanceKm = directDistanceKm * baseRoadFactor;
-    let estimatedDurationMinutes = (estimatedDistanceKm / averageSpeedKmh) * 60;
+    const externalRoute = useExternalRouting
+      ? await this.externalApiService.getDrivingRoute(start, end)
+      : null;
+
+    let estimatedDistanceKm: number;
+    let estimatedDurationMinutes: number;
+    let routingProvider: string;
+
+    if (externalRoute) {
+      estimatedDistanceKm = externalRoute.distanceKm;
+      estimatedDurationMinutes = externalRoute.durationMinutes;
+      routingProvider = externalRoute.provider;
+    } else {
+      estimatedDistanceKm = directDistanceKm * baseRoadFactor;
+      estimatedDurationMinutes = (estimatedDistanceKm / averageSpeedKmh) * 60;
+      routingProvider = 'local_heuristic';
+    }
+
+    const factors: RouteFactor[] = [];
+
+    if (externalRoute) {
+      const modeAdjustment = this.getExternalModeAdjustment(mode);
+
+      if (
+        modeAdjustment.distanceMultiplier !== 1 ||
+        modeAdjustment.durationMultiplier !== 1
+      ) {
+        const oldDistance = estimatedDistanceKm;
+        const oldDuration = estimatedDurationMinutes;
+
+        estimatedDistanceKm *= modeAdjustment.distanceMultiplier;
+        estimatedDurationMinutes *= modeAdjustment.durationMultiplier;
+
+        factors.push({
+          type: 'route_mode',
+          message: modeAdjustment.message,
+          impactDistanceKm: this.round(estimatedDistanceKm - oldDistance),
+          impactDurationMinutes: this.round(
+            estimatedDurationMinutes - oldDuration,
+          ),
+        });
+      }
+    }
 
     const checkpoints = await this.checkpointRepo.find();
+
     const incidents = await this.incidentRepo.find({
       relations: ['checkpoint'],
     });
 
     const nearbyCheckpoints = checkpoints.filter((checkpoint) => {
-      if (checkpoint.latitude == null || checkpoint.longitude == null)
+      if (checkpoint.latitude == null || checkpoint.longitude == null) {
         return false;
+      }
 
       return this.isPointNearSegment(
         start,
@@ -67,8 +123,9 @@ export class RouteMobilityService {
 
       const checkpoint = incident.checkpoint as any;
 
-      if (checkpoint.latitude == null || checkpoint.longitude == null)
+      if (checkpoint.latitude == null || checkpoint.longitude == null) {
         return false;
+      }
 
       return this.isPointNearSegment(
         start,
@@ -80,13 +137,6 @@ export class RouteMobilityService {
         5,
       );
     });
-
-    const factors: {
-      type: string;
-      message: string;
-      impactDistanceKm: number;
-      impactDurationMinutes: number;
-    }[] = [];
 
     if (nearbyCheckpoints.length > 0) {
       const checkpointPenaltyDistance = avoidCheckpoints
@@ -132,6 +182,7 @@ export class RouteMobilityService {
     }
 
     let affectedAreas = 0;
+
     for (const area of avoidAreas) {
       const intersects = this.lineIntersectsRectangle(
         start,
@@ -172,6 +223,8 @@ export class RouteMobilityService {
       estimatedDurationMinutes,
       metadata: {
         mode,
+        routingProvider,
+        useExternalRouting,
         directDistanceKm: this.round(directDistanceKm),
         baseRoadFactor,
         averageSpeedKmh,
@@ -179,8 +232,16 @@ export class RouteMobilityService {
         avoidedAreasCount: avoidAreas.length,
         nearbyCheckpointsCount: nearbyCheckpoints.length,
         nearbyIncidentsCount: nearbyIncidents.length,
+        externalRoute: externalRoute
+          ? {
+              provider: externalRoute.provider,
+              distanceKm: externalRoute.distanceKm,
+              durationMinutes: externalRoute.durationMinutes,
+              cached: externalRoute.metadata.cached,
+            }
+          : null,
         factors,
-        summary: `Estimated route in ${mode} mode: ${estimatedDistanceKm} km, ${estimatedDurationMinutes} minutes. Factors considered: ${nearbyCheckpoints.length} checkpoint(s), ${nearbyIncidents.length} verified incident(s), ${avoidAreas.length} avoided area(s).`,
+        summary: `Estimated route in ${mode} mode using ${routingProvider}: ${estimatedDistanceKm} km, ${estimatedDurationMinutes} minutes. Factors considered: ${nearbyCheckpoints.length} checkpoint(s), ${nearbyIncidents.length} verified incident(s), ${avoidAreas.length} avoided area(s).`,
       },
     };
   }
@@ -204,6 +265,35 @@ export class RouteMobilityService {
         return 35;
       default:
         return 45;
+    }
+  }
+
+  private getExternalModeAdjustment(mode: RouteMode): {
+    distanceMultiplier: number;
+    durationMultiplier: number;
+    message: string;
+  } {
+    switch (mode) {
+      case RouteMode.FASTEST:
+        return {
+          distanceMultiplier: 1,
+          durationMultiplier: 0.95,
+          message: 'Fastest mode prioritizes lower travel time.',
+        };
+
+      case RouteMode.SAFEST:
+        return {
+          distanceMultiplier: 1.08,
+          durationMultiplier: 1.12,
+          message: 'Safest mode allows a longer route to reduce mobility risk.',
+        };
+
+      default:
+        return {
+          distanceMultiplier: 1,
+          durationMultiplier: 1,
+          message: 'Balanced mode keeps the external route estimate unchanged.',
+        };
     }
   }
 
