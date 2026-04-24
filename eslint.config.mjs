@@ -1,8 +1,25 @@
 // @ts-check
 import eslint from '@eslint/js';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import * as espree from 'espree';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+
+const loadTestsJsConfig = {
+  ...tseslint.configs.disableTypeChecked,
+  files: ['load-tests/**/*.js'],
+  languageOptions: {
+    ecmaVersion: 'latest',
+    globals: {
+      ...globals.node,
+      __ENV: true,
+      __VU: true,
+      __ITER: true,
+    },
+    parser: espree,
+    sourceType: 'module',
+  },
+};
 
 export default tseslint.config(
   {
@@ -36,4 +53,5 @@ export default tseslint.config(
       'prettier/prettier': ['error', { endOfLine: 'auto' }],
     },
   },
+  loadTestsJsConfig,
 );
