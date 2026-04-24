@@ -5,9 +5,9 @@ import { CheckpointsController } from './checkpoints.controller';
 import { Checkpoint } from './entities/checkpoint.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Checkpoint])],
-    providers: [CheckpointsService],
-    controllers: [CheckpointsController],
-    exports: [CheckpointsService],
+  imports: [TypeOrmModule.forFeature([Checkpoint])],
+  providers: [CheckpointsService],
+  controllers: [CheckpointsController],
+  exports: [CheckpointsService],
 })
-export class CheckpointsModule { }
+export class CheckpointsModule {}

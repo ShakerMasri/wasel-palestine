@@ -1,489 +1,360 @@
-# ������� Wasel Palestine - Checkpoints & Incidents API
+# Feature 3 — Route Estimation & Mobility Intelligence
 
-## ���� Overview
-
-The **Checkpoints & Incidents** module is responsible for handling and managing real-time reports related to military checkpoints and road conditions in Palestine.
-Each report is automatically linked to the user who created it and includes an **Automated Geocoding Engine**. This engine converts GPS coordinates ($lat, lon$) into precise street addresses using the Nominatim API to help citizens and authorities identify locations instantly.
-
-## ���ᴩ� Tech Stack
-
-- **Backend Framework:** NestJS
-- **Database:** PostgreSQL (running via Docker)
-- **ORM:** TypeORM
-- **Maps Integration:** Nominatim OpenStreetMap API
-- **Authentication & Security:** JWT & Passport.js
-- **Validation:** class-validator & class-transformer
-
-## ��ִ�� Prerequisites
-
-Before running the project, make sure you have the following installed:
-
-- **Node.js** (version 18 or higher)
-- **Docker Desktop**
-- **Postman** (for testing the API endpoints)
-
-# ������� Wasel Palestine - Route Mobility API
-
-## ���� Overview
-
-The **Route Mobility** module is responsible for handling and managing citizen reports related to road conditions, such as potholes, traffic signal malfunctions, and accidents.
-
-Each report is automatically linked to the user who created it and includes precise geographic coordinates to help authorities quickly locate and resolve the issue.
+> **Branch note**
+>
+> This README is intended for the **feature branch implementation** of Feature 3, not necessarily for the current main branch. It documents the work completed for the **Route Estimation & Mobility Intelligence** requirement and the supporting changes needed to make it functional inside the existing Wasel Palestine backend.
 
 ---
 
-## ���ᴩ� Tech Stack
+## 1. Overview
 
-- **Backend Framework:** NestJS
-- **Database:** PostgreSQL (running via Docker)
-- **ORM:** TypeORM
-- **Authentication & Security:** JWT & Passport.js
-- **Validation:** class-validator & class-transformer
+This branch implements **Feature 3: Route Estimation & Mobility Intelligence** for the Wasel Palestine backend.
 
----
+The goal of this feature is to provide an API endpoint that estimates a route between two locations and returns:
 
-## ��ִ�� Prerequisites
+- estimated distance
+- estimated duration
+- explanatory metadata about route-affecting factors
+- support for constraints such as avoiding checkpoints and avoiding specific areas
 
-Before running the project, make sure you have the following installed:
-
-- [Node.js](https://nodejs.org/) (version 16 or higher)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [Postman](https://www.postman.com/) (for testing the API endpoints)
+The implementation is **heuristic-based**, which matches the project requirement that exact routing accuracy is not mandatory.
 
 ---
 
-## ���� Setup & Run
+## 2. Why this branch was needed
 
-### 1. Set Up and Start the Database
+The original `route-mobility` module in the project structure was still oriented around reporting-style behavior rather than route estimation. Because of that, this branch repurposes the module to match the actual Feature 3 requirement.
 
-The project uses Docker to run a clean PostgreSQL database environment.
-The project uses Docker to run a clean PostgreSQL database environment.  
-Open the terminal in the project directory and run:
-
-````bash
-docker-compose up -d
-
-Note: The database is configured to run on port 5433 to avoid conflicts with other local PostgreSQL instances.
-
-2. Install Dependencies
-Bash
-npm install
-3. Run the Server
-In development mode, TypeORM uses synchronize: true to automatically create and update database tables.
-# ������� Wasel Palestine ��� Checkpoints & Incidents API
-
-## ���� Overview
-
-The **Checkpoints & Incidents** module handles and manages real-time reports related to military checkpoints and road conditions across Palestine.
-
-Each report is automatically linked to the authenticated user who created it and processed through an **Automated Geocoding Engine** ��� converting raw GPS coordinates (`lat`, `lon`) into precise, human-readable street addresses via the **Nominatim API**, enabling citizens and authorities to identify locations instantly.
+In addition, the existing `Checkpoint` model originally had no geographic coordinates, which made route estimation impossible. To fix that, this branch extends the checkpoint data model with latitude and longitude so the route logic can reason about location.
 
 ---
 
-## ���ᴩ� Tech Stack
+## 3. What was implemented
 
-| Layer | Technology |
-|---|---|
-| Backend Framework | NestJS |
-| Database | PostgreSQL (via Docker) |
-| ORM | TypeORM |
-| Maps Integration | Nominatim OpenStreetMap API |
-| Auth & Security | JWT & Passport.js |
-| Validation | class-validator & class-transformer |
+### 3.1 Route estimation endpoint
 
----
+A dedicated endpoint was implemented for route estimation:
 
-## ��ִ�� Prerequisites
-
-Ensure the following are installed before running the project:
-
-- [Node.js](https://nodejs.org/) v18 or higher
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [Postman](https://www.postman.com/) ��� for testing API endpoints
-
----
-
-## ���� Setup & Run
-
-### 1. Start the Database
-
-The project uses Docker to spin up a clean PostgreSQL environment.
-
-```bash
-docker-compose up -d
-````
-
-> **Note:** The database is configured on port `5433` to avoid conflicts with any local PostgreSQL instances.
-
-### 2. Install Dependencies
-
-```bash
-npm install
+```http
+POST /api/v1/route-mobility/estimate
 ```
 
-### 3. Start the Development Server
+This endpoint accepts:
 
-TypeORM runs with `synchronize: true` in development mode, automatically creating and updating database tables.
+- `startLatitude`
+- `startLongitude`
+- `endLatitude`
+- `endLongitude`
+- `mode` (`fastest`, `balanced`, `safest`)
+- `avoidCheckpoints`
+- `avoidAreas[]`
 
-```bash
-npm run start:dev
-```
+### 3.2 Heuristic route calculation
 
-���� API Endpoints
-To test protected endpoints that require authentication (JWT), you must first log in through the Auth endpoint, copy the access_token, and then add it in Postman under Authorization using Bearer Token.
+The route estimation logic is based on:
 
-1. Create a New Incident Report
-   Endpoint: POST /incidents
-   > Server runs at: **`http://localhost:3000`**
+- direct geographic distance using the **Haversine formula**
+- a route mode multiplier (`fastest`, `balanced`, `safest`)
+- penalties caused by nearby checkpoints
+- penalties caused by nearby **verified** incidents
+- additional detour penalties when the request includes avoided areas
+
+### 3.3 Metadata in the response
+
+The endpoint returns:
+
+- `estimatedDistanceKm`
+- `estimatedDurationMinutes`
+- `metadata.mode`
+- `metadata.directDistanceKm`
+- `metadata.baseRoadFactor`
+- `metadata.averageSpeedKmh`
+- `metadata.avoidCheckpoints`
+- `metadata.avoidedAreasCount`
+- `metadata.nearbyCheckpointsCount`
+- `metadata.nearbyIncidentsCount`
+- `metadata.factors[]`
+- `metadata.summary`
+
+### 3.4 Checkpoint data model enhancement
+
+To support real routing logic, the `Checkpoint` entity was enhanced with:
+
+- `latitude`
+- `longitude`
+
+This was a necessary change, because route estimation cannot work meaningfully if checkpoints only contain textual location data.
+
+### 3.5 Checkpoint DTOs and service/controller updates
+
+The checkpoints module was also improved so checkpoint records can be created and updated with coordinates.
+
+Changes include:
+
+- adding `CreateCheckpointDto`
+- adding `UpdateCheckpointDto`
+- using DTOs instead of `any`
+- supporting checkpoint updates
+- keeping route-related data consistent and reusable
 
 ---
 
-## ��ܺ Road Incidents & Checkpoint Management
+## 4. Architecture decision
 
-Description: Creates a new report. The system automatically fetches the human-readable address from the coordinates provided.
+This feature was implemented **without creating a separate RouteMobility database entity**.
 
-Request Body
-A centralized system for monitoring and managing checkpoints, road closures, delays, and hazardous conditions across the road network.
+That decision was intentional.
 
-### Core Features
+Feature 3 only needs to:
 
-- **Checkpoint Registry** ��� Maintains a comprehensive, up-to-date registry of all monitored checkpoints, each with a full **status history** to track changes and conditions over time.
+- read existing mobility-related data
+- estimate a route
+- return a response
 
-- **Incident Categorization** ��� Incidents are classified by **type** (closure, delay, accident, weather hazard, etc.) and **severity level**, enabling prioritized response and clear situational awareness.
+It does **not** require persisting route estimates to the database.
 
-- **Role-Based Management** ��� Authorized users (moderators & admins) have full control to **create, update, verify, and close** incidents through protected API endpoints.
+So the feature works as a computation layer on top of:
 
-- **Advanced Querying** ��� Full support for **filtering, sorting, and pagination** across all incident and checkpoint endpoints for efficient data retrieval.
+- `checkpoint`
+- `incident`
+- existing JWT-based authentication and versioned API structure
 
----
-
-## ���� External API Integration
-
-To enhance data accuracy and comprehensiveness, the platform integrates with external APIs that provide information from authoritative third-party sources.
-
-### Geolocation & Routing
-
-Integration with **OpenStreetMap-based providers** (via the Nominatim API) enables automatic reverse geocoding ��� converting raw GPS coordinates into precise, human-readable street addresses in real time.
-
-> This ensures every reported incident is tied to a verified, recognizable location ��� removing ambiguity and improving response time for both citizens and field teams.
+This keeps the design simpler and aligned with the current project architecture.
 
 ---
 
-## ���� API Endpoints
-
-> **Authentication:** For protected endpoints, log in via the Auth endpoint, copy the `access_token`, and add it in Postman under **Authorization ��� Bearer Token**.
-
-### 1. `POST /incidents` ��� Create a New Report
-
-���� **Requires Authentication (JWT)**
-
-Creates a new incident report. The system automatically resolves a human-readable address from the provided coordinates.
+## 5. Request example
 
 ```json
 {
-  "checkpointId": 1,
-  "type": "Closed",
-  "severity": "High",
-  "description": "Heavy inspections and long queues at the entrance.",
-  "lat": 32.2227,
-  "lon": 35.2621
+  "startLatitude": 32.2211,
+  "startLongitude": 35.2544,
+  "endLatitude": 31.9522,
+  "endLongitude": 35.2332,
+  "mode": "balanced",
+  "avoidCheckpoints": true,
+  "avoidAreas": [
+    {
+      "name": "Avoided block",
+      "minLatitude": 32.05,
+      "maxLatitude": 32.15,
+      "minLongitude": 35.20,
+      "maxLongitude": 35.30
+    }
+  ]
 }
 ```
 
 ---
 
-Description: Retrieves all incidents stored in the database, including their resolved location names.
-
-3. Update Incident/Status
-   Endpoint: PATCH /incidents/:id
-
-### 2. `GET /incidents` ��� Get All Incidents
-
-���� **Public**
-
-Retrieves all incidents stored in the database, including resolved location names.
-
----
-
-Description: Updates the verification status or description of a specific report.
-
-Request Body
-
-### 3. `PATCH /incidents/:id` ��� Update an Incident
-
-���� **Requires Authentication (JWT)**
-
-Updates the verification status or description of a specific report.
+## 6. Response example
 
 ```json
 {
-  "isVerified": true,
-  "description": "Confirmed by multiple field reports."
+  "start": {
+    "latitude": 32.2211,
+    "longitude": 35.2544
+  },
+  "end": {
+    "latitude": 31.9522,
+    "longitude": 35.2332
+  },
+  "estimatedDistanceKm": 41.87,
+  "estimatedDurationMinutes": 64.13,
+  "metadata": {
+    "mode": "balanced",
+    "directDistanceKm": 30.74,
+    "baseRoadFactor": 1.25,
+    "averageSpeedKmh": 45,
+    "avoidCheckpoints": true,
+    "avoidedAreasCount": 1,
+    "nearbyCheckpointsCount": 2,
+    "nearbyIncidentsCount": 1,
+    "factors": [
+      {
+        "type": "checkpoints",
+        "message": "Route adjusted to avoid 2 nearby checkpoint(s).",
+        "impactDistanceKm": 3.84,
+        "impactDurationMinutes": 12
+      }
+    ],
+    "summary": "Estimated route in balanced mode: 41.87 km, 64.13 minutes. Factors considered: 2 checkpoint(s), 1 verified incident(s), 1 avoided area(s)."
+  }
 }
-4. Get System Statistics
-Endpoint: GET /incidents/stats/summary
-
-Authentication: ���� Public
-
-Description: Retrieves a statistical summary of reports and high-severity alerts.
-
-���䴩� Database Schema & Relationships
-The following tables and relationships were designed to ensure data integrity:
-
-users: Stores authenticated user information (name, email, and hashed password).
-
-checkpoints: Stores the master list of monitored locations.
-
-incidents: This table has a Many-to-One relationship with both users and checkpoints:
 ```
 
 ---
 
-### 4. `GET /incidents/stats/summary` ��� System Statistics
+## 7. Related modules used by Feature 3
 
-���� **Public**
+This implementation depends mainly on:
 
-Returns a statistical summary of all reports and high-severity alerts.
+- `checkpoints`
+- `incidents`
+- `auth`
+- `route-mobility`
+
+### Checkpoints
+Used as route-affecting map points.
+
+### Incidents
+Used as route-affecting events. Verified incidents contribute to penalties in the route estimate.
+
+### Auth
+Used for protected endpoints such as checkpoint creation, depending on the project guard configuration.
 
 ---
 
-## ���䴩� Database Schema & Relationships
+## 8. Suggested file changes in this branch
 
-| Table         | Description                                                           |
-| ------------- | --------------------------------------------------------------------- |
-| `users`       | Stores authenticated user info (name, email, hashed password)         |
-| `checkpoints` | Master list of monitored locations                                    |
-| `incidents`   | Links to both `users` and `checkpoints` via Many-to-One relationships |
+The exact file list may vary depending on your final branch state, but the intended implementation includes changes similar to:
 
-Each report belongs to one specific user and one specific checkpoint.
+```text
+src/checkpoints/entities/checkpoint.entity.ts
+src/checkpoints/dto/create-checkpoint.dto.ts
+src/checkpoints/dto/update-checkpoint.dto.ts
+src/checkpoints/checkpoints.controller.ts
+src/checkpoints/checkpoints.service.ts
+src/route-mobility/dto/avoid-area.dto.ts
+src/route-mobility/dto/estimate-route.dto.ts
+src/route-mobility/route-mobility.controller.ts
+src/route-mobility/route-mobility.service.ts
+src/route-mobility/route-mobility.module.ts
+```
 
-������� Validation & Security
-A global ValidationPipe is enabled across the application.
+---
 
-Any non-whitelisted properties are rejected to prevent malicious or unexpected input.
+## 9. How to run
 
-AuthGuard is used to ensure that only authenticated users can create or update reports.
+### Install dependencies
 
-Developed by Yazan
-
-````
-
-> **Note:** The database is configured to run on port `5433` to avoid conflicts with other local PostgreSQL instances.
-
-### 2. Install Dependencies
 ```bash
 npm install
-````
-
-### 3. Run the Server
-
-In development mode, TypeORM uses `synchronize: true` to automatically create and update database tables.
-
-```bash
-npm run start:dev
 ```
 
-The server will run by default at: `http://localhost:3000`
+### Start the database / containers
 
----
-
-## ���� API Endpoints
-
-To test protected endpoints that require authentication (JWT), you must first log in through the **Auth** endpoint, copy the `access_token`, and then add it in Postman under **Authorization** using **Bearer Token**.
-
-### 1. Create a New Report
-
-- **Endpoint:** `POST /route-mobility/report`
-- **Authentication:** ���� Requires login (JWT)
-- **Description:** Creates a new report and links it to the authenticated user's ID extracted from the token.
-
-#### Request Body
-
-```json
-{
-  "category": "Pothole",
-  "description": "There is a deep pothole obstructing traffic at the main intersection.",
-  "latitude": 32.22111,
-  "longitude": 35.25444
-}
-```
-
-### 2. Get All Reports
-
-- **Endpoint:** `GET /route-mobility/reports`
-- **Authentication:** ���� Public
-- **Description:** Retrieves all reports stored in the database for display, such as on a map.
-
-### 3. Update Report Status
-
-- **Endpoint:** `PATCH /route-mobility/report/:id/status`
-- **Authentication:** ���� Requires login (JWT)
-- **Description:** Updates the status of a report, for example from `Pending` to `In Progress`.
-
-#### Request Body
-
-```json
-{
-  "status": "In Progress"
-}
-```
-
----
-
-## ���䴩� Database Schema & Relationships
-
-The following tables and relationships were designed to ensure data integrity:
-
-- **`users`**  
-  Stores authenticated user information such as name, email, and hashed password.
-
-- **`user_reports`**  
-  Stores report details. This table has a **Many-to-One** relationship with the `users` table, which means:
-  - One user can submit multiple reports
-  - Each report belongs to one specific user
-
----
-
-## ������� Validation & Security
-
-- A global **ValidationPipe** is enabled across the application.
-- Any non-whitelisted properties are rejected to prevent malicious or unexpected input.
-- `AuthGuard` is used to ensure that only authenticated users can create or update reports.
-- A single **user** can submit multiple reports.
-- Each **report** belongs to exactly one user and one checkpoint.
-
----
-
-## ������� Validation & Security
-
-- A **global `ValidationPipe`** is applied across the entire application.
-- Any **non-whitelisted properties** in request bodies are automatically rejected.
-- **`AuthGuard`** enforces that only authenticated users can create or update reports.
-
----
-
-<p align="center">Developed with ���� by <strong>Yazan</strong> �������</p>
-
-# 🇵🇸 Wasel Palestine - Route Mobility API
-
-## 📖 Overview
-
-The **Route Mobility** module is responsible for handling and managing citizen reports related to road conditions, such as potholes, traffic signal malfunctions, and accidents.
-
-Each report is automatically linked to the user who created it and includes precise geographic coordinates to help authorities quickly locate and resolve the issue.
-
----
-
-## 🛠️ Tech Stack
-
-- **Backend Framework:** NestJS
-- **Database:** PostgreSQL (running via Docker)
-- **ORM:** TypeORM
-- **Authentication & Security:** JWT & Passport.js
-- **Validation:** class-validator & class-transformer
-
----
-
-## ⚙️ Prerequisites
-
-Before running the project, make sure you have the following installed:
-
-- [Node.js](https://nodejs.org/) (version 16 or higher)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [Postman](https://www.postman.com/) (for testing the API endpoints)
-
----
-
-## 🚀 Setup & Run
-
-### 1. Set Up and Start the Database
-
-The project uses Docker to run a clean PostgreSQL database environment.  
-Open the terminal in the project directory and run:
+If your setup uses Docker:
 
 ```bash
 docker-compose up -d
 ```
 
-> **Note:** The database is configured to run on port `5433` to avoid conflicts with other local PostgreSQL instances.
-
-### 2. Install Dependencies
-
-```bash
-npm install
-```
-
-### 3. Run the Server
-
-In development mode, TypeORM uses `synchronize: true` to automatically create and update database tables.
+### Run the server
 
 ```bash
 npm run start:dev
 ```
 
-The server will run by default at: `http://localhost:3000`
+The API base path is expected to be:
 
----
-
-## 🔗 API Endpoints
-
-To test protected endpoints that require authentication (JWT), you must first log in through the **Auth** endpoint, copy the `access_token`, and then add it in Postman under **Authorization** using **Bearer Token**.
-
-### 1. Create a New Report
-
-- **Endpoint:** `POST /route-mobility/report`
-- **Authentication:** 🔒 Requires login (JWT)
-- **Description:** Creates a new report and links it to the authenticated user's ID extracted from the token.
-
-#### Request Body
-
-```json
-{
-  "category": "Pothole",
-  "description": "There is a deep pothole obstructing traffic at the main intersection.",
-  "latitude": 32.22111,
-  "longitude": 35.25444
-}
-```
-
-### 2. Get All Reports
-
-- **Endpoint:** `GET /route-mobility/reports`
-- **Authentication:** 🌐 Public
-- **Description:** Retrieves all reports stored in the database for display, such as on a map.
-
-### 3. Update Report Status
-
-- **Endpoint:** `PATCH /route-mobility/report/:id/status`
-- **Authentication:** 🔒 Requires login (JWT)
-- **Description:** Updates the status of a report, for example from `Pending` to `In Progress`.
-
-#### Request Body
-
-```json
-{
-  "status": "In Progress"
-}
+```text
+http://localhost:3000/api/v1
 ```
 
 ---
 
-## 🗄️ Database Schema & Relationships
+## 10. How to test the feature
 
-The following tables and relationships were designed to ensure data integrity:
+### Step 1 — login
+Use the authentication endpoint to obtain a JWT token if the endpoint you are testing is protected.
 
-- **`users`**  
-  Stores authenticated user information such as name, email, and hashed password.
+```http
+POST /api/v1/auth/login
+```
 
-- **`user_reports`**  
-  Stores report details. This table has a **Many-to-One** relationship with the `users` table, which means:
-  - One user can submit multiple reports
-  - Each report belongs to one specific user
+### Step 2 — create checkpoints with coordinates
+Create checkpoints that include:
+
+- name
+- location
+- latitude
+- longitude
+- currentStatus
+
+### Step 3 — verify there is incident/checkpoint data
+Make sure the database contains checkpoints and incidents that can influence the estimation.
+
+### Step 4 — test the route endpoint
+Send a POST request to:
+
+```http
+POST /api/v1/route-mobility/estimate
+```
+
+using **Postman** or **ApiDog**.
 
 ---
 
-## 🛡️ Validation & Security
+## 11. API testing note
 
-- A global **ValidationPipe** is enabled across the application.
-- Any non-whitelisted properties are rejected to prevent malicious or unexpected input.
-- `AuthGuard` is used to ensure that only authenticated users can create or update reports.
+Swagger was not the final testing workflow used for this feature branch. The feature was validated more practically through **Postman / ApiDog** requests.
+
+This is especially useful when:
+
+- JWT login is required first
+- request bodies need quick iteration
+- the branch is under active development
+
+---
+
+## 12. Current limitations
+
+This feature is intentionally heuristic.
+
+That means:
+
+- it does **not** use a real external routing engine yet
+- it does **not** calculate exact road graph paths
+- accuracy depends on the quality of checkpoint coordinates and verified incident data
+- penalties are approximation-based, not traffic-simulation based
+
+This still satisfies the project requirement because exact route precision is not mandatory for Feature 3.
+
+---
+
+## 13. Possible future improvements
+
+If the project is extended later, the next upgrades could include:
+
+- integrating OpenStreetMap / OpenRouteService or another routing API
+- adding weather impact into route metadata
+- storing route estimation logs for analytics
+- returning alternative routes instead of a single estimate
+- adding unit and e2e tests specifically for route scenarios
+- adding the final endpoint documentation to ApiDog export and collection deliverables
+
+---
+
+## 14. Branch submission note
+
+This work is prepared to live on a **feature branch** and can later be merged into the main branch through the normal Git workflow.
+
+Suggested branch naming examples:
+
+```text
+feature/route-mobility
+feature/feature-3-route-estimation
+```
+
+Suggested PR title:
+
+```text
+Implement Feature 3: Route Estimation & Mobility Intelligence
+```
+
+---
+
+## 15. Final summary
+
+This branch completes the core implementation of **Feature 3 — Route Estimation & Mobility Intelligence** by:
+
+- adding a dedicated route estimation endpoint
+- returning estimated distance and duration
+- returning explanatory metadata
+- supporting checkpoint avoidance
+- supporting avoided areas
+- extending checkpoint data with geographic coordinates
+- integrating existing checkpoint and incident data into heuristic route logic
+
+In short, this branch transforms `route-mobility` from a non-matching placeholder into a feature that aligns with the actual Feature 3 requirement.
