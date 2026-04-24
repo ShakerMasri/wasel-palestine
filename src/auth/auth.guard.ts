@@ -7,13 +7,15 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { Reflector } from '@nestjs/core';
+import { ConfigService } from '@nestjs/config';
 import { IS_PUBLIC_KEY } from './decorators/public.decorator';
-import { jwtConstants } from './constants';
+
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
-    private jwtService: JwtService,
-    private reflector: Reflector,
+    private readonly jwtService: JwtService,
+    private readonly reflector: Reflector,
+    private readonly configService: ConfigService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -22,29 +24,27 @@ export class AuthGuard implements CanActivate {
       context.getClass(),
     ]);
 
-    console.log('--- Checking Route ---');
-    console.log('Path:', context.switchToHttp().getRequest().url);
-    console.log('Is Public?:', isPublic);
-
     if (isPublic) {
-      console.log('--- Access Granted by Guard ---');
       return true;
     }
 
-    const request = context.switchToHttp().getRequest();
+    const request = context.switchToHttp().getRequest<Request>();
     const token = this.extractTokenFromHeader(request);
 
     if (!token) {
       throw new UnauthorizedException();
     }
+
     try {
       const payload = await this.jwtService.verifyAsync(token, {
-        secret: jwtConstants.secret,
+        secret: this.configService.getOrThrow<string>('JWT_SECRET'),
       });
+
       request['user'] = payload;
     } catch {
       throw new UnauthorizedException();
     }
+
     return true;
   }
 
