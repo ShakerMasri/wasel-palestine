@@ -2,9 +2,7 @@ import http from 'k6/http';
 import { check, sleep } from 'k6';
 
 const BASE_URL = __ENV.BASE_URL || 'http://localhost:3000';
-const JWT_TOKEN =
-  __ENV.JWT_TOKEN ||
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3NzcwMzUyNTIsImV4cCI6MTc3NzAzODg1Mn0.ARU0IgwHCDKdEqGxLe3iMQX2c_8W1000n9BOAFi3CgI ';
+const JWT_TOKEN = __ENV.JWT_TOKEN || 'YOUR_ACTUAL_JWT_TOKEN_HERE';
 
 const HEADERS = {
   headers: {
