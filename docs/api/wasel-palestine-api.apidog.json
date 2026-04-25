@@ -1,0 +1,5265 @@
+{
+  "apidogProject": "1.0.0",
+  "$schema": {
+    "app": "apidog",
+    "type": "project",
+    "version": "1.2.0"
+  },
+  "info": {
+    "name": "fainal wasel",
+    "description": "",
+    "mockRule": {
+      "rules": [],
+      "enableSystemRule": true
+    }
+  },
+  "projectSetting": {
+    "id": "1268963",
+    "auth": {},
+    "securityScheme": {},
+    "gateway": [],
+    "language": "en-US",
+    "apiStatuses": [
+      "developing",
+      "testing",
+      "released",
+      "deprecated"
+    ],
+    "mockSettings": {},
+    "preProcessors": [],
+    "postProcessors": [],
+    "advancedSettings": {
+      "enableJsonc": false,
+      "enableBigint": false,
+      "responseValidate": true,
+      "enableTestScenarioSetting": false,
+      "enableYAPICompatScript": false,
+      "isDefaultUrlEncoding": 3,
+      "publishedDocUrlRules": {
+        "defaultRule": "SLUGIFY_WITH_RESOURCE_KEY",
+        "resourceKeyStandard": "NEW"
+      }
+    },
+    "initialDisabledMockIds": [],
+    "servers": [
+      {
+        "id": "default",
+        "name": "Default Server",
+        "moduleId": 1227056
+      },
+      {
+        "id": "1227058",
+        "name": "Default Server",
+        "moduleId": 1227058
+      }
+    ],
+    "cloudMock": {
+      "security": "free",
+      "enable": false,
+      "tokenKey": "apidogToken"
+    }
+  },
+  "apiCollection": [
+    {
+      "name": "Root",
+      "id": 8119747,
+      "auth": {},
+      "securityScheme": {},
+      "parentId": 0,
+      "serverId": "",
+      "description": "",
+      "identityPattern": {
+        "httpApi": {
+          "type": "methodAndPath",
+          "bodyType": "",
+          "fields": []
+        }
+      },
+      "shareSettings": {},
+      "visibility": "SHARED",
+      "moduleId": 1227056,
+      "preProcessors": [
+        {
+          "id": "inheritProcessors",
+          "type": "inheritProcessors",
+          "data": {}
+        }
+      ],
+      "postProcessors": [
+        {
+          "id": "inheritProcessors",
+          "type": "inheritProcessors",
+          "data": {}
+        }
+      ],
+      "inheritPostProcessors": {},
+      "inheritPreProcessors": {},
+      "items": []
+    },
+    {
+      "name": "Root",
+      "id": 8119750,
+      "auth": {},
+      "securityScheme": {},
+      "parentId": 0,
+      "serverId": "",
+      "description": "",
+      "identityPattern": {
+        "httpApi": {
+          "type": "methodAndPath",
+          "bodyType": "",
+          "fields": []
+        }
+      },
+      "shareSettings": {},
+      "visibility": "SHARED",
+      "moduleId": 1227058,
+      "preProcessors": [
+        {
+          "id": "inheritProcessors",
+          "type": "inheritProcessors",
+          "data": {}
+        }
+      ],
+      "postProcessors": [
+        {
+          "id": "inheritProcessors",
+          "type": "inheritProcessors",
+          "data": {}
+        }
+      ],
+      "inheritPostProcessors": {},
+      "inheritPreProcessors": {},
+      "items": [
+        {
+          "name": "App",
+          "id": 8119752,
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 1227058,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "items": [
+            {
+              "name": "AppController_getHello",
+              "api": {
+                "id": "34145534",
+                "method": "get",
+                "path": "/api/v1",
+                "parameters": {
+                  "path": [],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "195468672",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "string"
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "application/json",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "App"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "AppController_getHello",
+                "sourceUrl": "",
+                "ordering": 6,
+                "cases": [
+                  {
+                    "id": 46270050,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "195468672",
+                    "parameters": {
+                      "path": [],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Auth",
+          "id": 8119753,
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 1227058,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "items": [
+            {
+              "name": "AuthController_signIn",
+              "api": {
+                "id": "34145535",
+                "method": "post",
+                "path": "/api/v1/auth/login",
+                "parameters": {
+                  "path": [],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "193820360",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "x-apidog-orders": []
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "application/json",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "$ref": "#/definitions/14538557"
+                  },
+                  "mediaType": "application/json",
+                  "oasExtensions": "",
+                  "required": true,
+                  "additionalContent": []
+                },
+                "description": "",
+                "tags": [
+                  "Auth"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "AuthController_signIn",
+                "sourceUrl": "",
+                "ordering": 6,
+                "cases": [
+                  {
+                    "id": 46270051,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "193820360",
+                    "parameters": {
+                      "path": [],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "data": "",
+                      "type": "application/json",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "AuthController_register",
+              "api": {
+                "id": "34145536",
+                "method": "post",
+                "path": "/api/v1/auth/register",
+                "parameters": {
+                  "path": [],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "192010270",
+                    "code": "201",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "$ref": "#/definitions/14538558"
+                  },
+                  "mediaType": "application/json",
+                  "oasExtensions": "",
+                  "required": true,
+                  "additionalContent": []
+                },
+                "description": "",
+                "tags": [
+                  "Auth"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "AuthController_register",
+                "sourceUrl": "",
+                "ordering": 12,
+                "cases": [
+                  {
+                    "id": 46270052,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "192010270",
+                    "parameters": {
+                      "path": [],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "data": "",
+                      "type": "application/json",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "AuthController_getProfile",
+              "api": {
+                "id": "34145537",
+                "method": "get",
+                "path": "/api/v1/auth/profile",
+                "parameters": {
+                  "path": [],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "130145529",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "x-apidog-orders": []
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "application/json",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "Auth"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "AuthController_getProfile",
+                "sourceUrl": "",
+                "ordering": 18,
+                "cases": [
+                  {
+                    "id": 46270053,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "130145529",
+                    "parameters": {
+                      "path": [],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Checkpoints",
+          "id": 8119754,
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 1227058,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "items": [
+            {
+              "name": "Create a checkpoint",
+              "api": {
+                "id": "34145538",
+                "method": "post",
+                "path": "/api/v1/checkpoints",
+                "parameters": {
+                  "path": [],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {
+                  "type": "securityscheme"
+                },
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "121397144",
+                    "code": "201",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Checkpoint created successfully",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "$ref": "#/definitions/14538559"
+                  },
+                  "mediaType": "application/json",
+                  "oasExtensions": "",
+                  "required": true,
+                  "additionalContent": []
+                },
+                "description": "",
+                "tags": [
+                  "Checkpoints"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "CheckpointsController_create",
+                "sourceUrl": "",
+                "ordering": 6,
+                "cases": [
+                  {
+                    "id": 46270054,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "121397144",
+                    "parameters": {
+                      "path": [],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "data": "",
+                      "type": "application/json",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Get all checkpoints",
+              "api": {
+                "id": "34145539",
+                "method": "get",
+                "path": "/api/v1/checkpoints",
+                "parameters": {
+                  "path": [],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "122348907",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/14538560"
+                      }
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "application/json",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "Checkpoints"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "CheckpointsController_findAll",
+                "sourceUrl": "",
+                "ordering": 12,
+                "cases": [
+                  {
+                    "id": 46270055,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "122348907",
+                    "parameters": {
+                      "path": [],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Update a checkpoint",
+              "api": {
+                "id": "34145540",
+                "method": "patch",
+                "path": "/api/v1/checkpoints/{id}",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "enable": true,
+                      "description": "",
+                      "example": "",
+                      "type": "number",
+                      "schema": {
+                        "type": "number"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {
+                  "type": "securityscheme"
+                },
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "199027847",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "$ref": "#/definitions/14538560"
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "application/json",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "$ref": "#/definitions/14538566"
+                  },
+                  "mediaType": "application/json",
+                  "oasExtensions": "",
+                  "required": true,
+                  "additionalContent": []
+                },
+                "description": "",
+                "tags": [
+                  "Checkpoints"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "CheckpointsController_update",
+                "sourceUrl": "",
+                "ordering": 18,
+                "cases": [
+                  {
+                    "id": 46270056,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "199027847",
+                    "parameters": {
+                      "path": [
+                        {
+                          "id": "id#0",
+                          "relatedId": "id#0",
+                          "relatedName": "id",
+                          "name": "id",
+                          "value": "",
+                          "enable": true
+                        }
+                      ],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "data": "",
+                      "type": "application/json",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Reporting",
+          "id": 8119755,
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 1227058,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "items": [
+            {
+              "name": "Create a report",
+              "api": {
+                "id": "34145541",
+                "method": "post",
+                "path": "/api/v1/reports",
+                "parameters": {
+                  "path": [],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "136618788",
+                    "code": "201",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Report created successfully",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  },
+                  {
+                    "id": "113728684",
+                    "code": "400",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Invalid report payload",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "$ref": "#/definitions/14538567"
+                  },
+                  "mediaType": "application/json",
+                  "oasExtensions": "",
+                  "required": true,
+                  "additionalContent": []
+                },
+                "description": "",
+                "tags": [
+                  "Reporting"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "ReportsController_createReport",
+                "sourceUrl": "",
+                "ordering": 6,
+                "cases": [
+                  {
+                    "id": 46270057,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "136618788",
+                    "parameters": {
+                      "path": [],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "data": "",
+                      "type": "application/json",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Get all reports",
+              "api": {
+                "id": "34145542",
+                "method": "get",
+                "path": "/api/v1/reports",
+                "parameters": {
+                  "path": [],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "167181966",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Reports returned successfully",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "Reporting"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "ReportsController_findAllReports",
+                "sourceUrl": "",
+                "ordering": 12,
+                "cases": [
+                  {
+                    "id": 46270058,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "167181966",
+                    "parameters": {
+                      "path": [],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Get a report by ID",
+              "api": {
+                "id": "34145543",
+                "method": "get",
+                "path": "/api/v1/reports/{id}",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "enable": true,
+                      "description": "",
+                      "example": "",
+                      "type": "string",
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "182933060",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Report returned successfully",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  },
+                  {
+                    "id": "152939188",
+                    "code": "404",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Report not found",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "Reporting"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "ReportsController_findReportById",
+                "sourceUrl": "",
+                "ordering": 18,
+                "cases": [
+                  {
+                    "id": 46270059,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "182933060",
+                    "parameters": {
+                      "path": [
+                        {
+                          "id": "id#0",
+                          "relatedId": "id#0",
+                          "relatedName": "id",
+                          "name": "id",
+                          "value": "",
+                          "enable": true
+                        }
+                      ],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Update a report",
+              "api": {
+                "id": "34145544",
+                "method": "patch",
+                "path": "/api/v1/reports/{id}",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "enable": true,
+                      "description": "",
+                      "example": "",
+                      "type": "string",
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "163021182",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Report updated successfully",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "$ref": "#/definitions/14538568"
+                  },
+                  "mediaType": "application/json",
+                  "oasExtensions": "",
+                  "required": true,
+                  "additionalContent": []
+                },
+                "description": "",
+                "tags": [
+                  "Reporting"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "ReportsController_updateReport",
+                "sourceUrl": "",
+                "ordering": 24,
+                "cases": [
+                  {
+                    "id": 46270060,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "163021182",
+                    "parameters": {
+                      "path": [
+                        {
+                          "id": "id#0",
+                          "relatedId": "id#0",
+                          "relatedName": "id",
+                          "name": "id",
+                          "value": "",
+                          "enable": true
+                        }
+                      ],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "data": "",
+                      "type": "application/json",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Delete a report",
+              "api": {
+                "id": "34145545",
+                "method": "delete",
+                "path": "/api/v1/reports/{id}",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "enable": true,
+                      "description": "",
+                      "example": "",
+                      "type": "string",
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "185736131",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Report deleted successfully",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "Reporting"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "ReportsController_removeReport",
+                "sourceUrl": "",
+                "ordering": 30,
+                "cases": [
+                  {
+                    "id": 46270061,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "185736131",
+                    "parameters": {
+                      "path": [
+                        {
+                          "id": "id#0",
+                          "relatedId": "id#0",
+                          "relatedName": "id",
+                          "name": "id",
+                          "value": "",
+                          "enable": true
+                        }
+                      ],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Approve a report",
+              "api": {
+                "id": "34145546",
+                "method": "patch",
+                "path": "/api/v1/reports/{id}/approve",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "enable": true,
+                      "description": "",
+                      "example": "",
+                      "type": "string",
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {
+                  "type": "securityscheme"
+                },
+                "securityScheme": {
+                  "schemeGroups": [
+                    {
+                      "id": "YPo3OQB9pl_ftycVjKkPK",
+                      "schemeIds": [
+                        524016
+                      ]
+                    }
+                  ],
+                  "required": true,
+                  "use": {
+                    "id": "YPo3OQB9pl_ftycVjKkPK",
+                    "configs": {
+                      "524016": {
+                        "authConfigs": {
+                          "x-apidog": {
+                            "token": "{{bearerToken}}"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "scopes": {
+                    "YPo3OQB9pl_ftycVjKkPK": {
+                      "524016": []
+                    }
+                  }
+                },
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "195555908",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Report approved successfully",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  },
+                  {
+                    "id": "196805177",
+                    "code": "401",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Unauthorized",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "Reporting"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "ReportsController_approveReport",
+                "sourceUrl": "",
+                "ordering": 36,
+                "cases": [
+                  {
+                    "id": 46270062,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "195555908",
+                    "parameters": {
+                      "path": [
+                        {
+                          "id": "id#0",
+                          "relatedId": "id#0",
+                          "relatedName": "id",
+                          "name": "id",
+                          "value": "",
+                          "enable": true
+                        }
+                      ],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Reject a report",
+              "api": {
+                "id": "34145547",
+                "method": "patch",
+                "path": "/api/v1/reports/{id}/reject",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "enable": true,
+                      "description": "",
+                      "example": "",
+                      "type": "string",
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {
+                  "type": "securityscheme"
+                },
+                "securityScheme": {
+                  "schemeGroups": [
+                    {
+                      "id": "UnL41NrcXh5bwFPnKVpKQ",
+                      "schemeIds": [
+                        524016
+                      ]
+                    }
+                  ],
+                  "required": true,
+                  "use": {
+                    "id": "UnL41NrcXh5bwFPnKVpKQ",
+                    "configs": {
+                      "524016": {
+                        "authConfigs": {
+                          "x-apidog": {
+                            "token": "{{bearerToken}}"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "scopes": {
+                    "UnL41NrcXh5bwFPnKVpKQ": {
+                      "524016": []
+                    }
+                  }
+                },
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "185311768",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Report rejected successfully",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  },
+                  {
+                    "id": "102755715",
+                    "code": "401",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Unauthorized",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "Reporting"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "ReportsController_rejectReport",
+                "sourceUrl": "",
+                "ordering": 42,
+                "cases": [
+                  {
+                    "id": 46270063,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "185311768",
+                    "parameters": {
+                      "path": [
+                        {
+                          "id": "id#0",
+                          "relatedId": "id#0",
+                          "relatedName": "id",
+                          "name": "id",
+                          "value": "",
+                          "enable": true
+                        }
+                      ],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Get moderation logs for a report",
+              "api": {
+                "id": "34145548",
+                "method": "get",
+                "path": "/api/v1/reports/{id}/logs",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "enable": true,
+                      "description": "",
+                      "example": "",
+                      "type": "string",
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {
+                  "type": "securityscheme"
+                },
+                "securityScheme": {
+                  "schemeGroups": [
+                    {
+                      "id": "FdZ6UFf1H0vq7pYulE3pD",
+                      "schemeIds": [
+                        524016
+                      ]
+                    }
+                  ],
+                  "required": true,
+                  "use": {
+                    "id": "FdZ6UFf1H0vq7pYulE3pD",
+                    "configs": {
+                      "524016": {
+                        "authConfigs": {
+                          "x-apidog": {
+                            "token": "{{bearerToken}}"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "scopes": {
+                    "FdZ6UFf1H0vq7pYulE3pD": {
+                      "524016": []
+                    }
+                  }
+                },
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "195738961",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Moderation logs returned successfully",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  },
+                  {
+                    "id": "177990164",
+                    "code": "401",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Unauthorized",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "Reporting"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "ReportsController_getReportLogs",
+                "sourceUrl": "",
+                "ordering": 48,
+                "cases": [
+                  {
+                    "id": 46270064,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "195738961",
+                    "parameters": {
+                      "path": [
+                        {
+                          "id": "id#0",
+                          "relatedId": "id#0",
+                          "relatedName": "id",
+                          "name": "id",
+                          "value": "",
+                          "enable": true
+                        }
+                      ],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Vote on a report",
+              "api": {
+                "id": "34145549",
+                "method": "post",
+                "path": "/api/v1/reports/{id}/vote",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "enable": true,
+                      "description": "",
+                      "example": "",
+                      "type": "string",
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {
+                  "type": "securityscheme"
+                },
+                "securityScheme": {
+                  "schemeGroups": [
+                    {
+                      "id": "3veqmxnOlK0KVolih76fY",
+                      "schemeIds": [
+                        524016
+                      ]
+                    }
+                  ],
+                  "required": true,
+                  "use": {
+                    "id": "3veqmxnOlK0KVolih76fY",
+                    "configs": {
+                      "524016": {
+                        "authConfigs": {
+                          "x-apidog": {
+                            "token": "{{bearerToken}}"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "scopes": {
+                    "3veqmxnOlK0KVolih76fY": {
+                      "524016": []
+                    }
+                  }
+                },
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "182290612",
+                    "code": "201",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Vote recorded successfully",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  },
+                  {
+                    "id": "197787176",
+                    "code": "401",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Unauthorized",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "$ref": "#/definitions/14538569"
+                  },
+                  "mediaType": "application/json",
+                  "oasExtensions": "",
+                  "required": true,
+                  "additionalContent": []
+                },
+                "description": "",
+                "tags": [
+                  "Reporting"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "ReportVotesController_voteOnReport",
+                "sourceUrl": "",
+                "ordering": 54,
+                "cases": [
+                  {
+                    "id": 46270065,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "182290612",
+                    "parameters": {
+                      "path": [
+                        {
+                          "id": "id#0",
+                          "relatedId": "id#0",
+                          "relatedName": "id",
+                          "name": "id",
+                          "value": "",
+                          "enable": true
+                        }
+                      ],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "data": "",
+                      "type": "application/json",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Remove a report vote",
+              "api": {
+                "id": "34145550",
+                "method": "delete",
+                "path": "/api/v1/reports/{id}/vote",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "enable": true,
+                      "description": "",
+                      "example": "",
+                      "type": "string",
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {
+                  "type": "securityscheme"
+                },
+                "securityScheme": {
+                  "schemeGroups": [
+                    {
+                      "id": "fdHFMrPRKaHE_M3LJ_gGJ",
+                      "schemeIds": [
+                        524016
+                      ]
+                    }
+                  ],
+                  "required": true,
+                  "use": {
+                    "id": "fdHFMrPRKaHE_M3LJ_gGJ",
+                    "configs": {
+                      "524016": {
+                        "authConfigs": {
+                          "x-apidog": {
+                            "token": "{{bearerToken}}"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "scopes": {
+                    "fdHFMrPRKaHE_M3LJ_gGJ": {
+                      "524016": []
+                    }
+                  }
+                },
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "118830372",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Vote removed successfully",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  },
+                  {
+                    "id": "125572139",
+                    "code": "401",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Unauthorized",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "Reporting"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "ReportVotesController_removeVote",
+                "sourceUrl": "",
+                "ordering": 60,
+                "cases": [
+                  {
+                    "id": 46270066,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "118830372",
+                    "parameters": {
+                      "path": [
+                        {
+                          "id": "id#0",
+                          "relatedId": "id#0",
+                          "relatedName": "id",
+                          "name": "id",
+                          "value": "",
+                          "enable": true
+                        }
+                      ],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Get report vote summary",
+              "api": {
+                "id": "34145551",
+                "method": "get",
+                "path": "/api/v1/reports/{id}/votes",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "enable": true,
+                      "description": "",
+                      "example": "",
+                      "type": "string",
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {
+                  "type": "securityscheme"
+                },
+                "securityScheme": {
+                  "schemeGroups": [
+                    {
+                      "id": "l4Km7Iz8H3zXLb2fsMcfQ",
+                      "schemeIds": [
+                        524016
+                      ]
+                    }
+                  ],
+                  "required": true,
+                  "use": {
+                    "id": "l4Km7Iz8H3zXLb2fsMcfQ",
+                    "configs": {
+                      "524016": {
+                        "authConfigs": {
+                          "x-apidog": {
+                            "token": "{{bearerToken}}"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "scopes": {
+                    "l4Km7Iz8H3zXLb2fsMcfQ": {
+                      "524016": []
+                    }
+                  }
+                },
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "189140553",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Vote summary returned successfully",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  },
+                  {
+                    "id": "184592026",
+                    "code": "401",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Unauthorized",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "Reporting"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "ReportVotesController_getReportVotes",
+                "sourceUrl": "",
+                "ordering": 66,
+                "cases": [
+                  {
+                    "id": 46270067,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "189140553",
+                    "parameters": {
+                      "path": [
+                        {
+                          "id": "id#0",
+                          "relatedId": "id#0",
+                          "relatedName": "id",
+                          "name": "id",
+                          "value": "",
+                          "enable": true
+                        }
+                      ],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Route Mobility",
+          "id": 8119756,
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 1227058,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "items": [
+            {
+              "name": "Estimate a route between two locations",
+              "api": {
+                "id": "34145552",
+                "method": "post",
+                "path": "/api/v1/route-mobility/estimate",
+                "parameters": {
+                  "path": [],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "102064647",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Estimated route returned successfully",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "$ref": "#/definitions/14538571"
+                  },
+                  "mediaType": "application/json",
+                  "oasExtensions": "",
+                  "required": true,
+                  "additionalContent": []
+                },
+                "description": "",
+                "tags": [
+                  "Route Mobility"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "RouteMobilityController_estimateRoute",
+                "sourceUrl": "",
+                "ordering": 6,
+                "cases": [
+                  {
+                    "id": 46270068,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "102064647",
+                    "parameters": {
+                      "path": [],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "data": "",
+                      "type": "application/json",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "External APIs",
+          "id": 8119757,
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 1227058,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "items": [
+            {
+              "name": "Get weather data for a city",
+              "api": {
+                "id": "34145553",
+                "method": "get",
+                "path": "/api/v1/weather/{city}",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "city#0",
+                      "name": "city",
+                      "required": true,
+                      "enable": true,
+                      "description": "",
+                      "example": "",
+                      "type": "string",
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "108371863",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Weather data returned successfully",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "External APIs"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "ExternalApiController_getWeatherLegacy",
+                "sourceUrl": "",
+                "ordering": 6,
+                "cases": [
+                  {
+                    "id": 46270069,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "108371863",
+                    "parameters": {
+                      "path": [
+                        {
+                          "id": "city#0",
+                          "relatedId": "city#0",
+                          "relatedName": "city",
+                          "name": "city",
+                          "value": "",
+                          "enable": true
+                        }
+                      ],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Get weather data for a city",
+              "api": {
+                "id": "34145554",
+                "method": "get",
+                "path": "/api/v1/external-api/weather/{city}",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "city#0",
+                      "name": "city",
+                      "required": true,
+                      "enable": true,
+                      "description": "",
+                      "example": "",
+                      "type": "string",
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "118522873",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "Weather data returned successfully",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "External APIs"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "ExternalApiController_getWeather",
+                "sourceUrl": "",
+                "ordering": 12,
+                "cases": [
+                  {
+                    "id": 46270070,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "118522873",
+                    "parameters": {
+                      "path": [
+                        {
+                          "id": "city#0",
+                          "relatedId": "city#0",
+                          "relatedName": "city",
+                          "name": "city",
+                          "value": "",
+                          "enable": true
+                        }
+                      ],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "Get external routing estimate from OpenRouteService",
+              "api": {
+                "id": "34145555",
+                "method": "post",
+                "path": "/api/v1/external-api/routing/estimate",
+                "parameters": {
+                  "path": [],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "180798017",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "External routing estimate returned successfully",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "$ref": "#/definitions/14538571"
+                  },
+                  "mediaType": "application/json",
+                  "oasExtensions": "",
+                  "required": true,
+                  "additionalContent": []
+                },
+                "description": "",
+                "tags": [
+                  "External APIs"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "ExternalApiController_estimateExternalRoute",
+                "sourceUrl": "",
+                "ordering": 18,
+                "cases": [
+                  {
+                    "id": 46270071,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "180798017",
+                    "parameters": {
+                      "path": [],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "data": "",
+                      "type": "application/json",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Alerts",
+          "id": 8119758,
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 1227058,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "items": [
+            {
+              "name": "AlertsController_subscribe",
+              "api": {
+                "id": "34145556",
+                "method": "post",
+                "path": "/api/v1/alerts/subscribe",
+                "parameters": {
+                  "path": [],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "184500041",
+                    "code": "201",
+                    "headers": [],
+                    "jsonSchema": {
+                      "$ref": "#/definitions/14538563"
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "application/json",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "application/json",
+                  "parameters": [],
+                  "jsonSchema": {
+                    "$ref": "#/definitions/14538572"
+                  },
+                  "mediaType": "application/json",
+                  "oasExtensions": "",
+                  "required": true,
+                  "additionalContent": []
+                },
+                "description": "",
+                "tags": [
+                  "Alerts"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "AlertsController_subscribe",
+                "sourceUrl": "",
+                "ordering": 6,
+                "cases": [
+                  {
+                    "id": 46270072,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "184500041",
+                    "parameters": {
+                      "path": [],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "data": "",
+                      "type": "application/json",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "AlertsController_getMyAlerts",
+              "api": {
+                "id": "34145557",
+                "method": "get",
+                "path": "/api/v1/alerts/my-subscriptions",
+                "parameters": {
+                  "path": [],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "166989514",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/14538563"
+                      }
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "application/json",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "Alerts"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "AlertsController_getMyAlerts",
+                "sourceUrl": "",
+                "ordering": 12,
+                "cases": [
+                  {
+                    "id": 46270073,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "166989514",
+                    "parameters": {
+                      "path": [],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            }
+          ]
+        },
+        {
+          "name": "Incidents",
+          "id": 8119759,
+          "auth": {},
+          "securityScheme": {},
+          "parentId": 0,
+          "serverId": "",
+          "description": "",
+          "identityPattern": {
+            "httpApi": {
+              "type": "inherit",
+              "bodyType": "",
+              "fields": []
+            }
+          },
+          "shareSettings": {},
+          "visibility": "INHERITED",
+          "moduleId": 1227058,
+          "preProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "postProcessors": [
+            {
+              "id": "inheritProcessors",
+              "type": "inheritProcessors",
+              "data": {}
+            }
+          ],
+          "inheritPostProcessors": {},
+          "inheritPreProcessors": {},
+          "items": [
+            {
+              "name": "IncidentsController_create",
+              "api": {
+                "id": "34145558",
+                "method": "post",
+                "path": "/api/v1/incidents",
+                "parameters": {
+                  "path": [],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "119230631",
+                    "code": "201",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "x-apidog-orders": []
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "application/json",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "Incidents"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "IncidentsController_create",
+                "sourceUrl": "",
+                "ordering": 6,
+                "cases": [
+                  {
+                    "id": 46270074,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "119230631",
+                    "parameters": {
+                      "path": [],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "IncidentsController_findAll",
+              "api": {
+                "id": "34145559",
+                "method": "get",
+                "path": "/api/v1/incidents",
+                "parameters": {
+                  "path": [],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "182140174",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "Incidents"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "IncidentsController_findAll",
+                "sourceUrl": "",
+                "ordering": 12,
+                "cases": [
+                  {
+                    "id": 46270075,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "182140174",
+                    "parameters": {
+                      "path": [],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "IncidentsController_update",
+              "api": {
+                "id": "34145560",
+                "method": "patch",
+                "path": "/api/v1/incidents/{id}",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "enable": true,
+                      "description": "",
+                      "example": "",
+                      "type": "string",
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "195451356",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "$ref": "#/definitions/14538565"
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "json",
+                    "mediaType": "application/json",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "Incidents"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "IncidentsController_update",
+                "sourceUrl": "",
+                "ordering": 18,
+                "cases": [
+                  {
+                    "id": 46270076,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "195451356",
+                    "parameters": {
+                      "path": [
+                        {
+                          "id": "id#0",
+                          "relatedId": "id#0",
+                          "relatedName": "id",
+                          "name": "id",
+                          "value": "",
+                          "enable": true
+                        }
+                      ],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            },
+            {
+              "name": "IncidentsController_remove",
+              "api": {
+                "id": "34145561",
+                "method": "delete",
+                "path": "/api/v1/incidents/{id}",
+                "parameters": {
+                  "path": [
+                    {
+                      "id": "id#0",
+                      "name": "id",
+                      "required": true,
+                      "enable": true,
+                      "description": "",
+                      "example": "",
+                      "type": "string",
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "query": [],
+                  "cookie": [],
+                  "header": []
+                },
+                "auth": {},
+                "securityScheme": {},
+                "commonParameters": {},
+                "responses": [
+                  {
+                    "id": "171148211",
+                    "code": "200",
+                    "headers": [],
+                    "jsonSchema": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "itemSchema": {},
+                    "description": "",
+                    "contentType": "noContent",
+                    "oasExtensions": ""
+                  }
+                ],
+                "responseExamples": [],
+                "requestBody": {
+                  "type": "none",
+                  "parameters": [],
+                  "required": false,
+                  "additionalContent": [],
+                  "oasExtensions": ""
+                },
+                "description": "",
+                "tags": [
+                  "Incidents"
+                ],
+                "status": "released",
+                "serverId": "",
+                "operationId": "IncidentsController_remove",
+                "sourceUrl": "",
+                "ordering": 24,
+                "cases": [
+                  {
+                    "id": 46270077,
+                    "type": "DEBUG_CASE",
+                    "path": null,
+                    "name": "Success",
+                    "responseId": "171148211",
+                    "parameters": {
+                      "path": [
+                        {
+                          "id": "id#0",
+                          "relatedId": "id#0",
+                          "relatedName": "id",
+                          "name": "id",
+                          "value": "",
+                          "enable": true
+                        }
+                      ],
+                      "query": [],
+                      "cookie": [],
+                      "header": []
+                    },
+                    "commonParameters": {},
+                    "requestBody": {
+                      "parameters": [],
+                      "type": "none",
+                      "generateMode": "normal"
+                    },
+                    "auth": {},
+                    "securityScheme": {},
+                    "advancedSettings": {
+                      "disabledSystemHeaders": {}
+                    },
+                    "requestResult": null,
+                    "visibility": "INHERITED",
+                    "moduleId": 1227058,
+                    "categoryId": 0,
+                    "tagIds": [],
+                    "apiTestDataList": [],
+                    "preProcessors": [],
+                    "postProcessors": [],
+                    "inheritPostProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    },
+                    "inheritPreProcessors": {
+                      "enable": {},
+                      "defaultEnable": {}
+                    }
+                  }
+                ],
+                "mocks": [],
+                "customApiFields": "{}",
+                "advancedSettings": {
+                  "disabledSystemHeaders": {}
+                },
+                "mockScript": {},
+                "codeSamples": [],
+                "commonResponseStatus": {},
+                "responseChildren": [],
+                "visibility": "INHERITED",
+                "moduleId": 1227058,
+                "oasExtensions": "",
+                "type": "http",
+                "preProcessors": [],
+                "postProcessors": [],
+                "inheritPostProcessors": {},
+                "inheritPreProcessors": {}
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "socketCollection": [],
+  "docCollection": [],
+  "webSocketCollection": [],
+  "socketIOCollection": [],
+  "mcpClientCollection": [],
+  "responseCollection": [
+    {
+      "_databaseId": 1493310,
+      "updatedAt": "2026-04-24T20:20:19.000Z",
+      "name": "Root",
+      "type": "root",
+      "children": [],
+      "moduleId": 1227056,
+      "parentId": 0,
+      "id": 1493310,
+      "ordering": [],
+      "items": []
+    },
+    {
+      "_databaseId": 1493312,
+      "updatedAt": "2026-04-24T20:22:59.000Z",
+      "name": "Root",
+      "type": "root",
+      "children": [],
+      "moduleId": 1227058,
+      "parentId": 0,
+      "id": 1493312,
+      "ordering": [],
+      "items": []
+    }
+  ],
+  "schemaCollection": [
+    {
+      "id": 3343381,
+      "name": "Root",
+      "visibility": "SHARED",
+      "moduleId": 1227056,
+      "items": []
+    },
+    {
+      "id": 3343384,
+      "name": "Root",
+      "visibility": "SHARED",
+      "moduleId": 1227058,
+      "items": [
+        {
+          "name": "LoginDto",
+          "displayName": "",
+          "id": "#/definitions/14538557",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "username",
+                "password"
+              ],
+              "x-apidog-orders": [
+                "username",
+                "password"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 1227058
+        },
+        {
+          "name": "RegisterDto",
+          "displayName": "",
+          "id": "#/definitions/14538558",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "username",
+                "email",
+                "password"
+              ],
+              "x-apidog-orders": [
+                "username",
+                "email",
+                "password"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 1227058
+        },
+        {
+          "name": "CreateCheckpointDto",
+          "displayName": "",
+          "id": "#/definitions/14538559",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "examples": [
+                    "Huwara Checkpoint"
+                  ]
+                },
+                "location": {
+                  "type": "string",
+                  "examples": [
+                    "Nablus - Ramallah road"
+                  ]
+                },
+                "latitude": {
+                  "type": "number",
+                  "minimum": -90,
+                  "maximum": 90,
+                  "examples": [
+                    32.144321
+                  ]
+                },
+                "longitude": {
+                  "type": "number",
+                  "minimum": -180,
+                  "maximum": 180,
+                  "examples": [
+                    35.287654
+                  ]
+                },
+                "currentStatus": {
+                  "type": "string",
+                  "examples": [
+                    "Open"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "location",
+                "latitude",
+                "longitude"
+              ],
+              "x-apidog-orders": [
+                "name",
+                "location",
+                "latitude",
+                "longitude",
+                "currentStatus"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 1227058
+        },
+        {
+          "name": "Checkpoint",
+          "displayName": "",
+          "id": "#/definitions/14538560",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "location": {
+                  "type": "string"
+                },
+                "latitude": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "longitude": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "currentStatus": {
+                  "type": "string"
+                },
+                "incidents": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/14538565"
+                  }
+                },
+                "histories": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "x-apidog-orders": []
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "location",
+                "latitude",
+                "longitude",
+                "currentStatus",
+                "incidents",
+                "histories"
+              ],
+              "x-apidog-orders": [
+                "id",
+                "name",
+                "location",
+                "latitude",
+                "longitude",
+                "currentStatus",
+                "incidents",
+                "histories"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 1227058
+        },
+        {
+          "name": "ReportVote",
+          "displayName": "",
+          "id": "#/definitions/14538561",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "vote_type": {
+                  "type": "string"
+                },
+                "report": {
+                  "$ref": "#/definitions/14538562"
+                },
+                "user": {
+                  "$ref": "#/definitions/14538564"
+                }
+              },
+              "required": [
+                "id",
+                "vote_type",
+                "report",
+                "user"
+              ],
+              "x-apidog-orders": [
+                "id",
+                "vote_type",
+                "report",
+                "user"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 1227058
+        },
+        {
+          "name": "UserReport",
+          "displayName": "",
+          "id": "#/definitions/14538562",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "category": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "latitude": {
+                  "type": "number"
+                },
+                "longitude": {
+                  "type": "number"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "upvotesCount": {
+                  "type": "number"
+                },
+                "downvotesCount": {
+                  "type": "number"
+                },
+                "timestamp": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "user": {
+                  "$ref": "#/definitions/14538564"
+                },
+                "votes": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/14538561"
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "category",
+                "description",
+                "latitude",
+                "longitude",
+                "status",
+                "upvotesCount",
+                "downvotesCount",
+                "timestamp",
+                "user",
+                "votes"
+              ],
+              "x-apidog-orders": [
+                "id",
+                "category",
+                "description",
+                "latitude",
+                "longitude",
+                "status",
+                "upvotesCount",
+                "downvotesCount",
+                "timestamp",
+                "user",
+                "votes"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 1227058
+        },
+        {
+          "name": "Alert",
+          "displayName": "",
+          "id": "#/definitions/14538563",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "region": {
+                  "type": "string"
+                },
+                "category": {
+                  "type": "string"
+                },
+                "isActive": {
+                  "type": "boolean"
+                },
+                "createdAt": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "user": {
+                  "$ref": "#/definitions/14538564"
+                }
+              },
+              "required": [
+                "id",
+                "region",
+                "category",
+                "isActive",
+                "createdAt",
+                "user"
+              ],
+              "x-apidog-orders": [
+                "id",
+                "region",
+                "category",
+                "isActive",
+                "createdAt",
+                "user"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 1227058
+        },
+        {
+          "name": "User",
+          "displayName": "",
+          "id": "#/definitions/14538564",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password_hash": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "credibility_score": {
+                  "type": "number"
+                },
+                "created_at": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "reports": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/14538562"
+                  }
+                },
+                "votes": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/14538561"
+                  }
+                },
+                "alerts": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/14538563"
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "username",
+                "email",
+                "password_hash",
+                "role",
+                "credibility_score",
+                "created_at",
+                "reports",
+                "votes",
+                "alerts"
+              ],
+              "x-apidog-orders": [
+                "id",
+                "username",
+                "email",
+                "password_hash",
+                "role",
+                "credibility_score",
+                "created_at",
+                "reports",
+                "votes",
+                "alerts"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 1227058
+        },
+        {
+          "name": "Incident",
+          "displayName": "",
+          "id": "#/definitions/14538565",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "severity": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "isVerified": {
+                  "type": "boolean"
+                },
+                "createdAt": {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                "checkpoint": {
+                  "$ref": "#/definitions/14538560"
+                },
+                "creator": {
+                  "$ref": "#/definitions/14538564"
+                }
+              },
+              "required": [
+                "id",
+                "type",
+                "severity",
+                "isVerified",
+                "createdAt",
+                "checkpoint",
+                "creator"
+              ],
+              "x-apidog-orders": [
+                "id",
+                "type",
+                "severity",
+                "description",
+                "isVerified",
+                "createdAt",
+                "checkpoint",
+                "creator"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 1227058
+        },
+        {
+          "name": "UpdateCheckpointDto",
+          "displayName": "",
+          "id": "#/definitions/14538566",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {},
+              "x-apidog-orders": []
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 1227058
+        },
+        {
+          "name": "CreateReportDto",
+          "displayName": "",
+          "id": "#/definitions/14538567",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "user_id": {
+                  "type": "number",
+                  "description": "Optional authenticated or fallback user ID",
+                  "examples": [
+                    12
+                  ]
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Report category",
+                  "examples": [
+                    "Road obstruction"
+                  ]
+                },
+                "description": {
+                  "type": "string",
+                  "minLength": 5,
+                  "maxLength": 1000,
+                  "description": "Detailed report description",
+                  "examples": [
+                    "A fallen barrier is blocking the main road."
+                  ]
+                },
+                "latitude": {
+                  "type": "number",
+                  "minimum": -90,
+                  "maximum": 90,
+                  "description": "Latitude coordinate",
+                  "examples": [
+                    31.7683
+                  ]
+                },
+                "longitude": {
+                  "type": "number",
+                  "minimum": -180,
+                  "maximum": 180,
+                  "description": "Longitude coordinate",
+                  "examples": [
+                    35.2137
+                  ]
+                }
+              },
+              "required": [
+                "category",
+                "description",
+                "latitude",
+                "longitude"
+              ],
+              "x-apidog-orders": [
+                "user_id",
+                "category",
+                "description",
+                "latitude",
+                "longitude"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 1227058
+        },
+        {
+          "name": "UpdateReportDto",
+          "displayName": "",
+          "id": "#/definitions/14538568",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "type": "string",
+                  "description": "Updated report category",
+                  "examples": [
+                    "Traffic obstruction"
+                  ]
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Updated report description",
+                  "examples": [
+                    "The obstruction has shifted closer to the checkpoint."
+                  ]
+                },
+                "latitude": {
+                  "type": "number",
+                  "description": "Updated latitude coordinate",
+                  "examples": [
+                    31.769
+                  ]
+                },
+                "longitude": {
+                  "type": "number",
+                  "description": "Updated longitude coordinate",
+                  "examples": [
+                    35.2142
+                  ]
+                }
+              },
+              "x-apidog-orders": [
+                "category",
+                "description",
+                "latitude",
+                "longitude"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 1227058
+        },
+        {
+          "name": "VoteReportDto",
+          "displayName": "",
+          "id": "#/definitions/14538569",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "vote_type": {
+                  "type": "string",
+                  "enum": [
+                    "upvote",
+                    "downvote"
+                  ],
+                  "description": "Vote direction",
+                  "examples": [
+                    "upvote"
+                  ]
+                }
+              },
+              "required": [
+                "vote_type"
+              ],
+              "x-apidog-orders": [
+                "vote_type"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 1227058
+        },
+        {
+          "name": "AvoidAreaDto",
+          "displayName": "",
+          "id": "#/definitions/14538570",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "examples": [
+                    "Avoided block"
+                  ]
+                },
+                "minLatitude": {
+                  "type": "number",
+                  "minimum": -90,
+                  "maximum": 90,
+                  "examples": [
+                    32.05
+                  ]
+                },
+                "maxLatitude": {
+                  "type": "number",
+                  "minimum": -90,
+                  "maximum": 90,
+                  "examples": [
+                    32.15
+                  ]
+                },
+                "minLongitude": {
+                  "type": "number",
+                  "minimum": -180,
+                  "maximum": 180,
+                  "examples": [
+                    35.2
+                  ]
+                },
+                "maxLongitude": {
+                  "type": "number",
+                  "minimum": -180,
+                  "maximum": 180,
+                  "examples": [
+                    35.3
+                  ]
+                }
+              },
+              "required": [
+                "minLatitude",
+                "maxLatitude",
+                "minLongitude",
+                "maxLongitude"
+              ],
+              "x-apidog-orders": [
+                "name",
+                "minLatitude",
+                "maxLatitude",
+                "minLongitude",
+                "maxLongitude"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 1227058
+        },
+        {
+          "name": "EstimateRouteDto",
+          "displayName": "",
+          "id": "#/definitions/14538571",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "startLatitude": {
+                  "type": "number",
+                  "minimum": -90,
+                  "maximum": 90,
+                  "examples": [
+                    32.2211
+                  ]
+                },
+                "startLongitude": {
+                  "type": "number",
+                  "minimum": -180,
+                  "maximum": 180,
+                  "examples": [
+                    35.2544
+                  ]
+                },
+                "endLatitude": {
+                  "type": "number",
+                  "minimum": -90,
+                  "maximum": 90,
+                  "examples": [
+                    31.9522
+                  ]
+                },
+                "endLongitude": {
+                  "type": "number",
+                  "minimum": -180,
+                  "maximum": 180,
+                  "examples": [
+                    35.2332
+                  ]
+                },
+                "mode": {
+                  "default": "balanced",
+                  "enum": [
+                    "fastest",
+                    "balanced",
+                    "safest"
+                  ],
+                  "type": "string",
+                  "examples": [
+                    "balanced"
+                  ]
+                },
+                "avoidCheckpoints": {
+                  "type": "boolean",
+                  "default": false,
+                  "examples": [
+                    true
+                  ]
+                },
+                "useExternalRouting": {
+                  "type": "boolean",
+                  "default": true,
+                  "examples": [
+                    true
+                  ]
+                },
+                "avoidAreas": {
+                  "default": [],
+                  "maxItems": 20,
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/14538570"
+                  }
+                }
+              },
+              "required": [
+                "startLatitude",
+                "startLongitude",
+                "endLatitude",
+                "endLongitude"
+              ],
+              "x-apidog-orders": [
+                "startLatitude",
+                "startLongitude",
+                "endLatitude",
+                "endLongitude",
+                "mode",
+                "avoidCheckpoints",
+                "useExternalRouting",
+                "avoidAreas"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 1227058
+        },
+        {
+          "name": "CreateAlertDto",
+          "displayName": "",
+          "id": "#/definitions/14538572",
+          "description": "",
+          "schema": {
+            "jsonSchema": {
+              "type": "object",
+              "properties": {
+                "region": {
+                  "type": "string",
+                  "default": ""
+                },
+                "category": {
+                  "type": "string",
+                  "default": ""
+                }
+              },
+              "required": [
+                "region",
+                "category"
+              ],
+              "x-apidog-orders": [
+                "region",
+                "category"
+              ]
+            }
+          },
+          "visibility": "INHERITED",
+          "moduleId": 1227058
+        }
+      ]
+    }
+  ],
+  "securitySchemeCollection": [
+    {
+      "id": 1297729,
+      "moduleId": 1227056,
+      "name": "Root",
+      "items": []
+    },
+    {
+      "id": 1296716,
+      "moduleId": 1227058,
+      "name": "Root",
+      "items": [
+        {
+          "id": 524016,
+          "name": "access-token",
+          "moduleId": 1227058,
+          "authType": "jwt",
+          "oasAuthType": "http",
+          "authConfigs": {
+            "scheme": "bearer",
+            "bearerFormat": "JWT",
+            "type": "http"
+          },
+          "guidanceConfigs": {}
+        }
+      ]
+    }
+  ],
+  "oasComponentCollection": [],
+  "requestCollection": [
+    {
+      "name": "Root",
+      "children": [],
+      "ordering": [
+        "requestFolder.10225265"
+      ],
+      "items": []
+    }
+  ],
+  "apiTestCaseCollection": [
+    {
+      "id": 0,
+      "name": "Root",
+      "children": [],
+      "items": []
+    }
+  ],
+  "testCaseReferences": [],
+  "environments": [],
+  "commonScripts": [],
+  "databaseConnections": [],
+  "globalVariables": [],
+  "commonParameters": null,
+  "customFunctions": [],
+  "projectTestCaseCategories": [
+    {
+      "id": 1269878,
+      "name": "Positive",
+      "description": "Valid inputs and correct expected results, representing typical usage."
+    },
+    {
+      "id": 1269879,
+      "name": "Negative",
+      "description": "Negative, invalid inputs such as missing fields, wrong types, unsupported methods, etc."
+    },
+    {
+      "id": 1269880,
+      "name": "Boundary",
+      "description": "Extreme or edge conditions, such as maximum string length, empty values, zero, null, etc."
+    },
+    {
+      "id": 1269881,
+      "name": "Security",
+      "description": "Test cases that may expose API security risks."
+    },
+    {
+      "id": 1269882,
+      "name": "Other",
+      "description": "Test cases not classified under existing categories."
+    }
+  ],
+  "projectTestCaseTags": [
+    {
+      "id": 5577711,
+      "name": "Required Fields Only",
+      "description": "Send only the required fields with valid values, omitting all optional fields, to test minimal valid requests."
+    },
+    {
+      "id": 5577712,
+      "name": "Valid Semantic",
+      "description": "Use values that are syntactically correct and also make sense in the business logic or domain context."
+    },
+    {
+      "id": 5577713,
+      "name": "Enum Combination Coverage",
+      "description": "For all enum-type parameters, apply orthogonal design to systematically construct test case combinations of parameters and their enum values, dedicated to testing enum coverage."
+    },
+    {
+      "id": 5577714,
+      "name": "Other Positive Case",
+      "description": "Provide realistic and valid inputs that match the API specification, producing the correct and expected result."
+    },
+    {
+      "id": 5577715,
+      "name": "Missing Required Fields",
+      "description": "Omit one or more required fields in the request body or parameters."
+    },
+    {
+      "id": 5577716,
+      "name": "Invalid Values",
+      "description": "Provide values that are within the correct type and format, but logically invalid for the field."
+    },
+    {
+      "id": 5577717,
+      "name": "Type Errors",
+      "description": "Use values with incorrect data types, such as sending a string instead of an integer."
+    },
+    {
+      "id": 5577718,
+      "name": "Format Errors",
+      "description": "Provide values in an incorrect format, e.g., wrong date pattern, malformed email address."
+    },
+    {
+      "id": 5577719,
+      "name": "Semantic Errors",
+      "description": "Use syntactically correct and properly formatted values that are logically impossible or violate domain rules."
+    },
+    {
+      "id": 5577720,
+      "name": "Other Negative Case",
+      "description": "Provide invalid or unexpected inputs that should trigger error handling or rejection by the API."
+    },
+    {
+      "id": 5577721,
+      "name": "Null",
+      "description": "Must be the JSON literal `null` (not empty, not \"null\")."
+    },
+    {
+      "id": 5577722,
+      "name": "Zero",
+      "description": "Must be the numeric literal 0."
+    },
+    {
+      "id": 5577723,
+      "name": "Empty Values",
+      "description": "Must be \"\"."
+    },
+    {
+      "id": 5577724,
+      "name": "Max Values",
+      "description": "Provide the exact minimum and maximum allowed values for numeric or date fields."
+    },
+    {
+      "id": 5577725,
+      "name": "Min Values",
+      "description": "Provide the exact minimum and maximum allowed values for numeric or date fields."
+    },
+    {
+      "id": 5577726,
+      "name": "Overflow",
+      "description": "Provide values just beyond the allowed minimum or maximum boundaries."
+    },
+    {
+      "id": 5577727,
+      "name": "Underflow",
+      "description": "Provide values just beyond the allowed minimum or maximum boundaries."
+    },
+    {
+      "id": 5577728,
+      "name": "Overly Long Strings",
+      "description": "Provide strings longer than the maximum allowed length, or shorter than the minimum required length."
+    },
+    {
+      "id": 5577729,
+      "name": "Overly Short Strings",
+      "description": "Provide strings longer than the maximum allowed length, or shorter than the minimum required length."
+    },
+    {
+      "id": 5577730,
+      "name": "Broken Object Level Authorization",
+      "description": "Users access or manipulate data objects without proper authorization."
+    },
+    {
+      "id": 5577731,
+      "name": "Access Control",
+      "description": "Restricting resources and actions users can access based on roles, permissions, or attributes."
+    },
+    {
+      "id": 5577732,
+      "name": "Auth Failures",
+      "description": "Authentication is weak, misconfigured, or bypassed, allowing unauthorized access."
+    },
+    {
+      "id": 5577733,
+      "name": "SQL Injection",
+      "description": "Insert malicious SQL code into input fields to test for SQL injection vulnerabilities."
+    },
+    {
+      "id": 5577734,
+      "name": "XSS Injection",
+      "description": "Inject JavaScript or HTML tags to test for cross-site scripting vulnerabilities."
+    },
+    {
+      "id": 5577735,
+      "name": "Fuzzy Input",
+      "description": "Send large or randomly generated payloads to test input validation and stability."
+    },
+    {
+      "id": 5577736,
+      "name": "Command Injection",
+      "description": "Insert shell commands into inputs to test for command execution vulnerabilities."
+    },
+    {
+      "id": 5577737,
+      "name": "JSON Injection",
+      "description": "Insert malicious or unexpected JSON structures to test parsing and validation."
+    },
+    {
+      "id": 5577738,
+      "name": "NoSQL Injection",
+      "description": "Provide NoSQL-specific malicious queries or operators to test for injection vulnerabilities."
+    },
+    {
+      "id": 5577739,
+      "name": "Other",
+      "description": "Test cases not classified under existing categories."
+    }
+  ],
+  "projectAssociations": [],
+  "moduleSettings": [
+    {
+      "id": "1227056",
+      "name": "Default module",
+      "description": "",
+      "moduleVariables": [],
+      "openApiInfo": {}
+    },
+    {
+      "id": "1227058",
+      "name": "Wasel Palestine API",
+      "description": "Wasel Palestine Smart Mobility & Checkpoint Intelligence API",
+      "moduleVariables": [],
+      "openApiInfo": {
+        "title": "Wasel Palestine API",
+        "version": "1.0",
+        "contact": {}
+      }
+    }
+  ]
+}
