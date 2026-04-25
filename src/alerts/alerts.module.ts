@@ -4,10 +4,14 @@ import { AlertsService } from './alerts.service';
 import { AlertsController } from './alerts.controller';
 import { Alert } from './entities/alert.entity';
 
+import { AlertRecord } from './entities/alert-record.entity';
+
 @Module({
-  imports: [TypeOrmModule.forFeature([Alert])],
+  imports: [
+    TypeOrmModule.forFeature([Alert, AlertRecord]), // ✅ الحل هنا
+  ],
   controllers: [AlertsController],
   providers: [AlertsService],
-  exports: [AlertsService], 
+  exports: [AlertsService],
 })
 export class AlertsModule {}
