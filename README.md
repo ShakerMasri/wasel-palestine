@@ -41,20 +41,21 @@ Ensure the following tools are installed:
 
 ```bash
 docker-compose up -d
-
+```
 The database runs on port 5433 to avoid conflicts with local PostgreSQL instances.
 
 ### 2. Install Dependencies
 ```bash
 npm install
+```
 ### 3. Run the Application
 ```bash
 npm run start:dev
-
+```
 The server will run at:
 ```bash
 http://localhost:3000
-
+```
 ## Authentication
 
 Some endpoints require JWT authentication.
@@ -88,7 +89,7 @@ POST /incidents
   "lat": 32.2227,
   "lon": 35.2621
 }
-
+```
 GET /incidents
 
 Public endpoint to retrieve all incidents.
@@ -102,6 +103,7 @@ Requires authentication
   "isVerified": true,
   "description": "Confirmed by multiple reports."
 }
+```
 GET /incidents/stats/summary
 
 Public endpoint that returns system statistics.
@@ -114,3 +116,9 @@ The system uses the Nominatim API to convert geographic coordinates into readabl
 users: stores user information
 checkpoints: stores checkpoint data
 incidents: linked to users and checkpoints (Many-to-One)
+
+## Validation & Security
+Global ValidationPipe is enabled
+Non-whitelisted properties are rejected
+AuthGuard protects secured endpoints
+Each report is linked to a single user
