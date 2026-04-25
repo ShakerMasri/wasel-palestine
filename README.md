@@ -65,6 +65,7 @@ Steps:
 -Log in via the Auth endpoint
 -Copy the access_token
 -Add it in Postman under Authorization → Bearer Token
+---
 ## Checkpoints & Incidents Module
 Description
 
@@ -74,7 +75,7 @@ This module manages reports related to checkpoints and road incidents. Each repo
 -Checkpoint tracking with status history
 -Incident classification by type and severity
 -Filtering, sorting, and pagination support
-
+---
 
 ##API Endpoints
 POST /incidents
@@ -117,9 +118,10 @@ The system uses the Nominatim API to convert geographic coordinates into readabl
 -users: stores user information
 -checkpoints: stores checkpoint data
 -incidents: linked to users and checkpoints (Many-to-One)
-
+---
 ## Validation & Security
 -Global ValidationPipe is enabled 
 -Non-whitelisted properties are rejected
 -AuthGuard protects secured endpoints
 -Each report is linked to a single user
+---
