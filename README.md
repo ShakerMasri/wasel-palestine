@@ -58,24 +58,25 @@ http://localhost:3000
 ```
 ## Authentication
 
-Some endpoints require JWT authentication.
+-Some endpoints require JWT authentication.
 
 Steps:
 
-Log in via the Auth endpoint
-Copy the access_token
-Add it in Postman under Authorization → Bearer Token
+-Log in via the Auth endpoint
+-Copy the access_token
+-Add it in Postman under Authorization → Bearer Token
 ## Checkpoints & Incidents Module
 Description
 
 This module manages reports related to checkpoints and road incidents. Each report is linked to a user and includes geographic coordinates that are converted into human-readable addresses.
 
 ## Features
-Checkpoint tracking with status history
-Incident classification by type and severity
-Role-based access for managing reports
-Filtering, sorting, and pagination support
-API Endpoints
+-Checkpoint tracking with status history
+-Incident classification by type and severity
+-Filtering, sorting, and pagination support
+
+
+##API Endpoints
 POST /incidents
 
 ##Requires authentication
@@ -113,12 +114,12 @@ Public endpoint that returns system statistics.
 The system uses the Nominatim API to convert geographic coordinates into readable addresses.
 
 ## Database Structure
-users: stores user information
-checkpoints: stores checkpoint data
-incidents: linked to users and checkpoints (Many-to-One)
+-users: stores user information
+-checkpoints: stores checkpoint data
+-incidents: linked to users and checkpoints (Many-to-One)
 
 ## Validation & Security
-Global ValidationPipe is enabled
-Non-whitelisted properties are rejected
-AuthGuard protects secured endpoints
-Each report is linked to a single user
+-Global ValidationPipe is enabled 
+-Non-whitelisted properties are rejected
+-AuthGuard protects secured endpoints
+-Each report is linked to a single user
