@@ -1,32 +1,240 @@
-# Wasel Palestine — Route Mobility & External API Integration
+# Wasel Palestine — Smart Mobility & Checkpoint Intelligence Platform
 
-## Overview
+**Advanced Software Engineering Course Project – RESTful APIs – Spring 2026**
 
-This document explains the updated implementation for **Feature 3 — Route Estimation & Mobility Intelligence** and the related external API, environment configuration, caching, timeout, rate limiting, and JWT security changes.
+**Instructor:** Dr. Amjad AbuHassan
 
-The update combines two important parts of the backend work:
+## Project Overview
 
-1. **Route Mobility Feature**
-   - Provides route estimation between two geographic points.
-   - Supports route-affecting constraints such as avoiding checkpoints and avoiding specific areas.
-   - Adds explanatory metadata showing how the estimate was calculated.
+**Wasel Palestine** is an API-centric smart mobility platform designed to support Palestinians in navigating daily movement challenges by providing structured, reliable, and up-to-date mobility intelligence.
 
-2. **External API Integration Update**
-   - Adds the missing required routing/geolocation external API.
-   - Keeps the existing weather API integration.
-   - Moves secrets and environment-specific values out of source code and into `.env`.
-   - Adds caching, timeouts, and rate limiting for safer external API usage.
+The platform aggregates data related to road conditions, checkpoints, traffic incidents, and environmental factors, and exposes this information through a well-defined backend API that can be consumed by mobile applications, web dashboards, or third-party systems.
 
-This aligns with the project requirement that the backend must integrate with at least two external APIs, including:
-
-- a routing or geolocation service
-- a contextual data provider such as a weather API
+The system focuses exclusively on backend engineering concerns, including API design, data modeling, external data integration, performance optimization, and system reliability. User interface development is outside the scope of this project.
 
 ---
 
-## What Was Added
+## Application Requirements
 
-### 1. Route Estimation Endpoint
+### Technology Stack
+
+This project uses **Node.js with NestJS** as the backend framework.
+
+**Justification:**
+- **Scalability:** NestJS provides a modular, enterprise-grade architecture that scales well with complex applications
+- **Security:** Built-in support for authentication/authorization patterns, validation pipes, and security best practices
+- **Maintainability:** TypeScript enables strong typing and clear code structure; dependency injection promotes loose coupling
+- **Development Efficiency:** Rich ecosystem of NestJS packages for auth, database ORM, caching, rate limiting, and configuration management
+
+### Core Technical Requirements
+
+- **Relational Database:** PostgreSQL (mandatory) with both Raw SQL queries and TypeORM ORM
+- **API Versioning:** All endpoints exposed through versioned APIs (`/api/v1/...`)
+- **RESTful APIs:** Full REST compliance for all endpoints (bonus: GraphQL for read-only endpoints planned)
+- **Containerization:** Docker used for application deployment with Docker Compose orchestration
+- **Authentication:** JWT implementation with access and refresh tokens
+
+---
+
+## Project Planning & Version Control
+
+**Git-Based Workflow (Mandatory)**
+- Feature branches for all development work
+- Pull requests required for merging into the main branch
+- Meaningful commit messages describing changes
+- All development activity is traceable through version control history
+
+---
+
+## Core Features
+
+### 1. Road Incidents & Checkpoint Management
+
+**Capabilities:**
+- Centralized registry of checkpoints, road closures, delays, and hazardous conditions
+- Status history tracking for each checkpoint to monitor changes over time
+- Incident categorization by type (closure, delay, accident, weather hazard, etc.) and severity level
+- Authorized users (moderators/admins) can create, update, verify, and close incidents
+- Full support for filtering, sorting, and pagination via API endpoints
+
+**Endpoints:**
+- `GET /api/v1/checkpoints` - List all checkpoints with filtering, sorting, pagination
+- `POST /api/v1/checkpoints` - Create new checkpoint (admin only)
+- `GET /api/v1/checkpoints/:id` - Get checkpoint details with history
+- `PUT /api/v1/checkpoints/:id` - Update checkpoint status
+- `GET /api/v1/incidents` - List incidents with filtering, sorting, pagination
+- `POST /api/v1/incidents` - Create incident (admin only)
+- `GET /api/v1/incidents/:id` - Get incident details
+
+### 2. Crowdsourced Reporting System
+
+**Capabilities:**
+- Citizens can submit reports related to mobility disruptions with geographic location, category, description, and timestamp
+- Validation and abuse-prevention mechanisms are implemented
+- Duplicate report detection to avoid redundant submissions
+- Moderation workflow for report verification and approval
+- Community-based credibility indicators through voting/confidence scoring
+- All moderation actions are auditable with complete action logs
+
+**Endpoints:**
+- `POST /api/v1/reports` - Submit a crowdsourced report
+- `GET /api/v1/reports` - List reports with filtering and pagination
+- `GET /api/v1/reports/:id` - Get report details with moderation status
+- `PUT /api/v1/reports/:id` - Update report status (moderator only)
+- `POST /api/v1/reports/:id/votes` - Vote on report credibility
+- `GET /api/v1/moderation-logs` - View audit trail of moderation actions
+
+### 3. Route Estimation & Mobility Intelligence
+
+**Capabilities:**
+- API endpoints that estimate routes between two locations
+- Route estimation provides:
+  - Estimated distance
+  - Estimated duration
+  - Explanatory metadata indicating factors affecting the route
+- Supports constraints such as:
+  - Avoiding checkpoints
+  - Avoiding specific geographic areas
+- Multiple route modes: fastest, balanced, safest
+- Route estimation may rely on heuristics; exact accuracy is not required
+
+**Endpoints:**
+- `POST /api/v1/route-mobility/estimate` - Estimate route between two coordinates with optional constraints
+
+### 4. Alerts & Regional Notifications
+
+**Capabilities:**
+- Users can subscribe to alerts based on geographic area and incident category
+- New verified incidents automatically trigger alert records for subscribed users
+- Architecture designed to allow future integration with external notification services (email, SMS, push)
+- Alert filtering and subscription management
+
+**Endpoints:**
+- `POST /api/v1/alerts/subscribe` - Create alert subscription
+- `GET /api/v1/alerts` - Get user's alerts
+- `PUT /api/v1/alerts/:id` - Update alert subscription
+- `DELETE /api/v1/alerts/:id` - Unsubscribe from alerts
+
+---
+
+## External API Integration
+
+The system integrates with at least two external APIs to enhance platform data accuracy and comprehensiveness:
+
+### Integrated External APIs
+
+#### 1. Routing/Geolocation Service: OpenRouteService
+- Provides route estimation between coordinates
+- Returns distance and duration for driving routes
+- Includes caching to minimize repeated API calls
+- Timeout protection to prevent hanging requests
+- Fallback to local heuristic estimation if external API fails
+
+**Endpoint:**
+- `POST /api/v1/external-api/routing/estimate` - Direct external routing test
+
+#### 2. Contextual Data Provider: OpenWeatherMap API
+- Provides weather conditions for specified cities
+- Returns temperature, humidity, and weather description
+- Includes caching for weather data
+- Timeout protection for reliability
+- Can be extended in future to directly affect route penalties
+
+**Endpoint:**
+- `GET /api/v1/weather/:city` - Get current weather for a city
+
+### External API Integration Requirements Met
+
+- **Authentication:** API keys properly managed via environment variables
+- **Rate Limiting:** Global request throttling implemented to protect against excessive traffic
+- **Timeouts:** Configurable timeout values for all external API calls
+- **Caching:** Response caching to reduce repeated external API calls and improve performance
+- **Error Handling:** Graceful fallback and error responses when external APIs are unavailable
+
+---
+
+## API Documentation & Testing
+
+All APIs are documented with comprehensive specifications, including:
+- Endpoint descriptions and purpose
+- Authentication flow requirements
+- Request and response schemas
+- Error format documentation
+- Example payloads
+
+### Deliverables
+- OpenAPI/Swagger documentation
+- Postman collection and environment files
+- Test execution results documented
+
+---
+
+## Performance & Load Testing
+
+**Mandatory Requirement:** System performance evaluated using k6 load testing framework.
+
+### Required Test Scenarios
+
+1. **Read-Heavy Workloads:** Incident and checkpoint listing endpoints
+2. **Write-Heavy Workloads:** Report submissions and incident creation
+3. **Mixed Workloads:** Combination of read and write operations
+4. **Spike Testing:** Sudden traffic bursts to measure system response
+5. **Sustained Load (Soak Testing):** Extended periods of moderate load to identify memory leaks
+
+### Metrics to Report
+
+- Average response time
+- P95 latency (95th percentile response time)
+- Throughput (requests per second)
+- Error rate under load
+- Identified bottlenecks
+
+### Performance Report Includes
+
+- Observed limitations and constraints
+- Root cause analysis of bottlenecks
+- Optimizations applied to address issues
+- Before/after comparison showing improvements
+
+**Load test scripts location:** `load-tests/` directory
+
+---
+
+## Documentation Requirements
+
+Complete project documentation includes:
+
+1. **System Overview:** High-level description of architecture and capabilities
+2. **Architecture Diagram:** Visual representation of system components and interactions
+3. **Database Schema (ERD):** Entity relationship diagram showing all tables and relationships
+4. **API Design Rationale:** Explanation of RESTful design decisions and endpoint structure
+5. **External API Integration Details:** How external APIs are integrated, cached, and handled
+6. **Testing Strategy:** Approach to unit testing, integration testing, and load testing
+7. **Performance Testing Results:** Detailed results from k6 load tests with analysis
+
+Documentation must be clear, structured, and complete for evaluation and future maintenance.
+
+---
+
+## Evaluation Criteria
+
+| Area | Weight |
+|------|--------|
+| API Design & Architecture | 30% |
+| Version Control | 10% |
+| Database (Schema & Implementation) | 15% |
+| Correctness & Security | 10% |
+| External API Integrations | 5% |
+| Performance & Load Analysis | 20% |
+| Documentation & Clarity | 10% |
+
+---
+
+## Implementation Details
+
+### What Was Added
+
+#### 1. Route Estimation Endpoint
 
 The route mobility module exposes a dedicated route estimation endpoint:
 
