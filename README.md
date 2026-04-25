@@ -214,6 +214,17 @@ Complete project documentation includes:
 
 Documentation must be clear, structured, and complete for evaluation and future maintenance.
 
+## Project Documentation
+
+Full project documentation is available in the `docs/` folder:
+
+- `docs/architecture.md` — system architecture, API design rationale, external integration overview
+- `docs/database.md` — database entity model and relationship summary
+- `docs/testing.md` — testing strategy, commands, and artifact references
+- `docs/performance.md` — k6 test results, metrics, and recommendations
+- `docs/api/Wasel Palestine API.openapi.json` — OpenAPI API specification
+- `docs/api/wasel-palestine-api.apidog.json` — Apidog/Postman import file
+
 ---
 
 ## Evaluation Criteria
